@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -15,34 +15,49 @@
                 extend: {
                     colors: {
                         terracotta: {
-                            50: '#fdf8f6',
-                            100: '#f2e8e5',
+                            50: '#fdf6f0',
+                            100: '#f9e9de',
+                            200: '#f2d0be',
+                            300: '#e7b095',
+                            400: '#d98b6a',
                             500: '#c2593f',
                             600: '#a8432a',
                             700: '#8c331d',
                             800: '#6e2716',
-                            900: '#521d10',
+                            900: '#4a190e',
+                            950: '#2b0c06',
                         },
                         ochre: {
+                            50: '#fffbf0',
                             100: '#fef3d6',
+                            200: '#fde4a6',
+                            300: '#fbd06d',
+                            400: '#f7b438',
                             500: '#d99b26',
                             600: '#b87d17',
+                            700: '#8f5d11',
                         },
                         forest: {
                             800: '#1b3b2b',
                             900: '#11261b',
+                            950: '#0a1710',
                         },
                         parchment: {
                             50: '#fcfbf7',
                             100: '#f7f4ea',
                             200: '#eee8d5',
                             300: '#e2d7ba',
+                            400: '#cebe96',
                         }
                     },
                     fontFamily: {
                         serif: ['Lora', 'Georgia', 'serif'],
                         heading: ['Cinzel', 'Georgia', 'serif'],
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px -5px rgba(194, 89, 63, 0.25)',
+                        'glow-lg': '0 0 35px -5px rgba(194, 89, 63, 0.35)',
                     }
                 }
             }
@@ -54,126 +69,157 @@
             height: 6px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05);
+            background: rgba(0,0,0,0.03);
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(194, 89, 63, 0.4);
+            background: rgba(194, 89, 63, 0.35);
             border-radius: 9999px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(194, 89, 63, 0.7);
+            background: rgba(194, 89, 63, 0.65);
+        }
+        .hero-pattern {
+            background-image: radial-gradient(rgba(217, 155, 38, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .card-gradient-overlay {
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
         }
     </style>
 </head>
-<body class="bg-parchment-50 dark:bg-stone-900 text-stone-800 dark:text-stone-100 font-sans transition-colors duration-200 min-h-screen flex flex-col custom-scrollbar">
+<body class="bg-parchment-50 dark:bg-stone-950 text-stone-800 dark:text-stone-100 font-sans transition-colors duration-300 min-h-screen flex flex-col custom-scrollbar selection:bg-terracotta-500 selection:text-white">
 
-    <header class="sticky top-0 z-30 bg-parchment-100/90 dark:bg-stone-950/90 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm transition-colors">
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-30 bg-parchment-100/90 dark:bg-stone-950/90 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-800/80 shadow-sm transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-terracotta-600 to-ochre-600 text-white flex items-center justify-center font-heading font-bold text-xl shadow">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-terracotta-600 via-terracotta-700 to-ochre-600 text-white flex items-center justify-center font-heading font-bold text-xl shadow-md ring-2 ring-terracotta-500/20">
                     JW
                 </div>
                 <div>
-                    <h1 class="font-heading text-lg sm:text-xl font-bold tracking-wide text-terracotta-800 dark:text-terracotta-500">
+                    <h1 class="font-heading text-lg sm:text-xl font-extrabold tracking-wider text-terracotta-900 dark:text-terracotta-400">
                         Jharkhand Women Writers
                     </h1>
-                    <p class="text-xs text-stone-500 dark:text-stone-400 font-serif italic">
+                    <p class="text-xs text-stone-500 dark:text-stone-400 font-serif italic tracking-wide">
                         Digital Cultural Archive &amp; Literary Bibliography
                     </p>
                 </div>
             </div>
 
             <div class="flex items-center space-x-3 sm:space-x-4">
-                <button id="favorites-btn" onclick="toggleFavoritesDrawer()" class="relative p-2.5 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 transition" title="Saved Writers">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <span id="fav-badge" class="hidden absolute -top-1 -right-1 bg-terracotta-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                <!-- Favorites Toggle Button -->
+                <button id="favorites-btn" onclick="toggleFavoritesDrawer()" class="relative p-2.5 rounded-xl bg-stone-200/50 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 transition-all border border-stone-300/40 dark:border-stone-800 flex items-center space-x-2 px-3" title="Saved Writers Archive">
+                    <svg class="w-5 h-5 text-terracotta-600 dark:text-terracotta-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                    <span class="text-xs font-semibold hidden sm:inline">Saved</span>
+                    <span id="fav-badge" class="bg-terracotta-600 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">0</span>
                 </button>
 
-                <button onclick="openNominateModal()" class="hidden md:flex items-center space-x-1 px-3.5 py-2 rounded-lg border border-terracotta-600 text-terracotta-700 dark:text-terracotta-400 dark:border-terracotta-500 hover:bg-terracotta-50 dark:hover:bg-stone-800 text-xs sm:text-sm font-medium transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    <span>Nominate Writer</span>
-                </button>
-
-                <button id="theme-toggle" onclick="toggleDarkMode()" class="p-2.5 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 transition" title="Toggle Dark/Light Mode">
-                    <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-stone-200/50 dark:bg-stone-900 hover:bg-stone-200 dark:hover:bg-stone-800 text-stone-700 dark:text-stone-300 transition-all border border-stone-300/40 dark:border-stone-800" title="Toggle Dark/Light Mode">
+                    <svg id="sun-icon" class="w-5 h-5 hidden text-ochre-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moon-icon" class="w-5 h-5 text-stone-600 dark:text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <section class="bg-gradient-to-r from-terracotta-900 via-forest-900 to-stone-900 text-parchment-100 py-12 px-4 sm:px-6 lg:px-8 border-b border-terracotta-800/40">
-        <div class="max-w-5xl mx-auto text-center space-y-4">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-ochre-500/20 text-ochre-100 border border-ochre-500/30 uppercase tracking-widest">
-                Preserving Indigenous Voices &amp; Literature
+    <!-- Hero Banner Section -->
+    <section class="relative bg-gradient-to-b from-terracotta-950 via-terracotta-900 to-forest-950 text-parchment-100 py-16 px-4 sm:px-6 lg:px-8 border-b border-terracotta-800/40 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-30 pointer-events-none"></div>
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-terracotta-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-ochre-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-5xl mx-auto text-center space-y-5">
+            <span class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-ochre-500/15 text-ochre-200 border border-ochre-500/30 uppercase tracking-widest backdrop-blur-md">
+                <span class="w-1.5 h-1.5 rounded-full bg-ochre-400 animate-pulse"></span>
+                <span>Preserving Indigenous Voices &amp; Literature</span>
             </span>
-            <h2 class="text-2xl sm:text-4xl font-heading font-bold text-white tracking-wide">
+
+            <h2 class="text-3xl sm:text-5xl font-heading font-extrabold text-white tracking-wide leading-tight">
                 Archive of Women Literary Figures of Jharkhand
             </h2>
-            <p class="text-sm sm:text-base font-serif text-parchment-200 max-w-3xl mx-auto leading-relaxed">
-                A comprehensive bibliography documenting over 55 prominent women poets, novelists, folklorists, activists, and dramatists writing in Santhali, Kurukh, Mundari, Ho, Kharia, Khortha, Nagpuri, and Hindi.
+
+            <p class="text-sm sm:text-base font-serif text-parchment-200 max-w-3xl mx-auto leading-relaxed opacity-90">
+                A source-checked bibliography documenting women writers and translators connected to Jharkhand across regional Santhali, Kurukh, Kharia, Nagpuri, Ho, Mundari, Sadri, and Hindi literary traditions.
             </p>
+
+            <!-- Project Authors Attribution -->
             <div class="pt-2 text-parchment-100">
-                <p class="text-sm sm:text-base font-semibold tracking-wide">Project by</p>
-                <div class="mt-1 text-xs sm:text-sm font-serif text-parchment-200 leading-relaxed">
-                    <p>Soni kumari - 26MA0023</p>
-                    <p>Puja kumari - 26MA0018</p>
-                    <p>Ananya bhattacharya - 26MA0005</p>
-                    <p>Khushboo kumari - 26MA0013</p>
+                <p class="text-xs uppercase tracking-widest font-semibold text-ochre-300/90">Project Developed By</p>
+                <div class="mt-2 flex flex-wrap justify-center items-center gap-x-6 gap-y-1 text-xs sm:text-sm font-serif text-parchment-200">
+                    <span class="hover:text-ochre-200 transition">Soni Kumari (26MA0023)</span>
+                    <span class="text-terracotta-500">•</span>
+                    <span class="hover:text-ochre-200 transition">Puja Kumari (26MA0018)</span>
+                    <span class="text-terracotta-500">•</span>
+                    <span class="hover:text-ochre-200 transition">Ananya Bhattacharya (26MA0005)</span>
+                    <span class="text-terracotta-500">•</span>
+                    <span class="hover:text-ochre-200 transition">Khushboo Kumari (26MA0013)</span>
                 </div>
             </div>
-            <div class="flex flex-wrap justify-center gap-6 pt-2 text-xs sm:text-sm text-parchment-300">
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-2 h-2 rounded-full bg-ochre-500"></span>
-                    <span><strong id="stat-writers-count">55+</strong> Authors Cataloged</span>
+
+            <!-- Stats Bar -->
+            <div class="pt-4 flex flex-wrap justify-center gap-4 text-xs sm:text-sm">
+                <div class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-ochre-400"></span>
+                    <span><strong id="stat-writers-count" class="text-white font-bold">50</strong> Cataloged Authors</span>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-2 h-2 rounded-full bg-terracotta-500"></span>
-                    <span>8 Native Languages</span>
+                <div class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-terracotta-400"></span>
+                    <span><strong>24</strong> Official Districts Covered</span>
                 </div>
-                <div class="flex items-center space-x-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span>24 Districts Represented</span>
+                <div class="px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center space-x-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                    <span><strong>7+</strong> Literary Traditions</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-        <div class="bg-white dark:bg-stone-950 p-4 sm:p-6 rounded-2xl shadow-sm border border-stone-200 dark:border-stone-800 mb-8 space-y-4">
-            <!-- Search Bar -->
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        <!-- Filter Controls Container -->
+        <div class="bg-white dark:bg-stone-900 p-5 sm:p-7 rounded-2xl shadow-xl shadow-stone-200/50 dark:shadow-none border border-stone-200/80 dark:border-stone-800 mb-8 space-y-5 transition-all">
+            
+            <!-- Search Input -->
             <div class="relative">
-                <input type="text" id="search-input" oninput="filterWriters()" placeholder="Search by writer name, book title, district, or language..." class="w-full pl-11 pr-10 py-3 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 transition">
-                <svg class="w-5 h-5 text-stone-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <button onclick="clearSearch()" id="clear-search-btn" class="hidden absolute right-3 top-3.5 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
+                <input type="text" id="search-input" oninput="filterWriters()" placeholder="Search by writer name, book title, district, or language..." class="w-full pl-11 pr-10 py-3.5 bg-stone-50 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500/80 focus:border-terracotta-500 transition-all shadow-inner">
+                <svg class="w-5 h-5 text-stone-400 absolute left-3.5 top-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <button onclick="clearSearch()" id="clear-search-btn" class="hidden absolute right-3.5 top-4 text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
 
             <!-- Language Pills Filter -->
             <div class="space-y-2">
-                <label class="text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400">Primary Language</label>
-                <div class="flex flex-wrap gap-1.5 sm:gap-2" id="language-pills">
+                <label class="text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400">Primary Language</label>
+                <div class="flex flex-wrap gap-2" id="language-pills">
                     <!-- Dynamic Pills -->
                 </div>
             </div>
 
             <!-- Dropdown Filters -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-2 border-t border-stone-100 dark:border-stone-800">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-3 border-t border-stone-100 dark:border-stone-800">
+                <!-- Genre Dropdown -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-500 dark:text-stone-400 mb-1">Genre / Form</label>
-                    <select id="genre-filter" onchange="filterWriters()" class="w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-1.5">Genre / Form</label>
+                    <select id="genre-filter" onchange="filterWriters()" class="w-full p-3 bg-stone-50 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 text-stone-800 dark:text-stone-200 transition">
                         <option value="ALL">All Genres &amp; Literary Forms</option>
                     </select>
                 </div>
+
+                <!-- 24 Jharkhand Districts Filter Dropdown -->
                 <div>
-                    <label class="block text-xs font-semibold text-stone-500 dark:text-stone-400 mb-1">District / Region</label>
-                    <select id="district-filter" onchange="filterWriters()" class="w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500">
-                        <option value="ALL">All Districts of Jharkhand</option>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-1.5">Jharkhand District (24 Districts)</label>
+                    <select id="district-filter" onchange="filterWriters()" class="w-full p-3 bg-stone-50 dark:bg-stone-950 border border-stone-300 dark:border-stone-800 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-terracotta-500 text-stone-800 dark:text-stone-200 transition">
+                        <option value="ALL">All 24 Districts of Jharkhand</option>
                     </select>
                 </div>
+
+                <!-- Reset Button -->
                 <div class="flex items-end">
-                    <button onclick="resetFilters()" class="w-full py-2.5 px-4 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-lg text-xs sm:text-sm font-medium transition flex items-center justify-center space-x-1.5">
+                    <button onclick="resetFilters()" class="w-full py-3 px-4 bg-stone-100 dark:bg-stone-800 hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center justify-center space-x-2 border border-stone-200 dark:border-stone-700">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                         <span>Reset All Filters</span>
                     </button>
@@ -181,1017 +227,192 @@
             </div>
         </div>
 
-        <!-- Filter Status & Count -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-2 text-sm text-stone-600 dark:text-stone-400">
-            <div>
-                Showing <strong id="visible-count" class="text-terracotta-700 dark:text-terracotta-400">0</strong> writers
+        <!-- Filter Status Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3 text-sm text-stone-600 dark:text-stone-400">
+            <div class="font-medium">
+                Showing <strong id="visible-count" class="text-terracotta-700 dark:text-terracotta-400 text-base">0</strong> writers in archive
             </div>
             <div id="active-filters-tags" class="flex flex-wrap gap-2"></div>
         </div>
 
         <!-- Writer Cards Grid -->
-        <div id="writers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="writers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             <!-- Dynamic Writer Cards rendered via JS -->
         </div>
 
         <!-- No Results Fallback -->
-        <div id="no-results" class="hidden text-center py-16 px-4 bg-white dark:bg-stone-950 rounded-2xl border border-stone-200 dark:border-stone-800 my-8">
-            <svg class="w-12 h-12 text-stone-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-            <h3 class="text-lg font-heading font-semibold text-stone-700 dark:text-stone-300">No Writers Found</h3>
-            <p class="text-xs sm:text-sm text-stone-500 mt-1 max-w-md mx-auto">Try adjusting your search terms or resetting the selected language, genre, and district filters.</p>
-            <button onclick="resetFilters()" class="mt-4 inline-flex items-center px-4 py-2 bg-terracotta-600 text-white rounded-lg text-xs font-medium hover:bg-terracotta-700 transition">Reset Filters</button>
+        <div id="no-results" class="hidden text-center py-20 px-4 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm my-8">
+            <svg class="w-14 h-14 text-stone-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            <h3 class="text-xl font-heading font-bold text-stone-800 dark:text-stone-200">No Writers Match Your Filter</h3>
+            <p class="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-2 max-w-md mx-auto font-serif">Try adjusting your search terms or clearing the selected language, genre, or district filters.</p>
+            <button onclick="resetFilters()" class="mt-5 inline-flex items-center px-5 py-2.5 bg-terracotta-600 hover:bg-terracotta-700 text-white rounded-xl text-xs font-bold transition shadow-md">Reset All Filters</button>
         </div>
     </main>
 
     <!-- Writer Detail Modal -->
-    <div id="writer-modal" class="fixed inset-0 z-50 hidden bg-stone-900/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto custom-scrollbar">
-        <div class="bg-white dark:bg-stone-950 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden my-auto transform transition-all">
+    <div id="writer-modal" class="fixed inset-0 z-50 hidden bg-stone-950/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto custom-scrollbar">
+        <div class="bg-white dark:bg-stone-900 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden my-auto transform transition-all">
             <!-- Modal Header -->
-            <div class="p-6 border-b border-stone-200 dark:border-stone-800 flex justify-between items-start bg-parchment-100/60 dark:bg-stone-900/60">
+            <div class="p-6 border-b border-stone-200 dark:border-stone-800 flex justify-between items-start bg-parchment-100/70 dark:bg-stone-950/70">
                 <div class="flex items-start space-x-4">
-                    <div id="modal-monogram" class="w-16 h-16 rounded-xl text-white font-heading font-bold text-2xl flex items-center justify-center shadow-md flex-shrink-0">
+                    <div id="modal-monogram" class="w-16 h-16 rounded-2xl text-white font-heading font-bold text-2xl flex items-center justify-center shadow-md flex-shrink-0">
                         --
                     </div>
                     <div>
                         <div class="flex flex-wrap items-center gap-2">
-                            <h2 id="modal-name" class="text-xl sm:text-2xl font-heading font-bold text-stone-900 dark:text-white"></h2>
-                            <span id="modal-era" class="text-xs px-2 py-0.5 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300"></span>
+                            <h2 id="modal-name" class="text-xl sm:text-2xl font-heading font-extrabold text-stone-900 dark:text-white"></h2>
+                            <span id="modal-era" class="text-xs px-2.5 py-0.5 rounded-full bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-semibold"></span>
                         </div>
                         <div id="modal-subtitle" class="text-xs sm:text-sm font-serif italic text-stone-600 dark:text-stone-400 mt-1"></div>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                            <span id="modal-language" class="text-xs px-2.5 py-0.5 rounded-md bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300 font-medium"></span>
-                            <span id="modal-district" class="text-xs px-2.5 py-0.5 rounded-md bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-medium"></span>
+                        <div class="flex flex-wrap gap-2 mt-2.5">
+                            <span id="modal-language" class="text-xs px-3 py-1 rounded-lg bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300 font-semibold"></span>
+                            <span id="modal-district" class="text-xs px-3 py-1 rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-semibold"></span>
                         </div>
                     </div>
                 </div>
-                <button onclick="closeWriterModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-200/50 dark:hover:bg-stone-800 transition">
+                <button onclick="closeWriterModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-2 rounded-xl hover:bg-stone-200/50 dark:hover:bg-stone-800 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
 
             <!-- Modal Content Body -->
-            <div class="p-6 overflow-y-auto space-y-6 custom-scrollbar flex-grow">
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 custom-scrollbar flex-grow">
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-terracotta-700 dark:text-terracotta-400 mb-2">Biography &amp; Literary Contribution</h3>
-                    <p id="modal-bio" class="text-sm font-serif text-stone-700 dark:text-stone-300 leading-relaxed sm:text-base"></p>
-                </div>
-
-                <div id="modal-quote-container" class="p-4 bg-parchment-100 dark:bg-stone-900 border-l-4 border-terracotta-500 rounded-r-xl italic font-serif text-xs sm:text-sm text-stone-700 dark:text-stone-300">
-                    "<span id="modal-quote"></span>"
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-terracotta-700 dark:text-terracotta-400 mb-2">Biography &amp; Literary Significance</h3>
+                    <p id="modal-bio" class="text-sm sm:text-base font-serif text-stone-700 dark:text-stone-300 leading-relaxed"></p>
                 </div>
 
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wider text-terracotta-700 dark:text-terracotta-400 mb-3">Published Works &amp; Bibliography</h3>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-8 h-0.5 bg-ochre-500 rounded-full"></span>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-terracotta-700 dark:text-terracotta-400">Major Published Works</h3>
+                    </div>
                     <div id="modal-books" class="space-y-3"></div>
                 </div>
             </div>
 
             <!-- Modal Footer -->
-            <div class="p-4 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/50 flex flex-wrap items-center justify-between gap-2">
-                <button id="modal-fav-toggle" onclick="" class="px-4 py-2 rounded-lg bg-terracotta-600 text-white hover:bg-terracotta-700 text-xs font-medium transition flex items-center space-x-1.5">
+            <div class="p-4 sm:p-5 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950 flex flex-wrap items-center justify-between gap-3">
+                <button id="modal-fav-toggle" onclick="" class="px-4 py-2.5 rounded-xl bg-terracotta-600 text-white hover:bg-terracotta-700 text-xs font-bold transition flex items-center space-x-2 shadow-sm">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <span id="modal-fav-text">Save to Favorites</span>
+                    <span id="modal-fav-text">Save to Personal Archive</span>
                 </button>
                 <div class="flex space-x-2">
-                    <button onclick="copyCitation()" class="px-3 py-2 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-lg text-xs font-medium transition">Copy Citation</button>
-                    <button onclick="closeWriterModal()" class="px-4 py-2 bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 rounded-lg text-xs font-medium transition">Close</button>
+                    <button onclick="copyCitation()" class="px-4 py-2.5 border border-stone-300 dark:border-stone-700 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-xl text-xs font-semibold transition">Copy Citation</button>
+                    <button onclick="closeWriterModal()" class="px-5 py-2.5 bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 dark:hover:bg-stone-700 rounded-xl text-xs font-semibold transition">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Saved Favorites Drawer -->
-    <div id="fav-drawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-white dark:bg-stone-950 shadow-2xl border-l border-stone-200 dark:border-stone-800 transform translate-x-full transition-transform duration-300 flex flex-col">
-        <div class="p-5 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-parchment-100 dark:bg-stone-900">
-            <h3 class="font-heading font-bold text-stone-800 dark:text-white flex items-center space-x-2">
+    <div id="fav-drawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-white dark:bg-stone-900 shadow-2xl border-l border-stone-200 dark:border-stone-800 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-5 border-b border-stone-200 dark:border-stone-800 flex justify-between items-center bg-parchment-100 dark:bg-stone-950">
+            <h3 class="font-heading font-bold text-stone-900 dark:text-white flex items-center space-x-2 text-base">
                 <svg class="w-5 h-5 text-terracotta-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 <span>Saved Writers Archive</span>
             </h3>
-            <button onclick="toggleFavoritesDrawer()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
+            <button onclick="toggleFavoritesDrawer()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200 p-1.5 rounded-lg hover:bg-stone-200/50 dark:hover:bg-stone-800">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
         <div id="fav-drawer-list" class="p-4 overflow-y-auto space-y-3 flex-grow custom-scrollbar">
             <!-- Dynamic saved items -->
         </div>
-        <div class="p-4 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900">
-            <button onclick="clearAllFavorites()" class="w-full py-2 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-lg text-xs font-medium transition">Clear All Saved</button>
-        </div>
-    </div>
-
-    <!-- Community Nomination Modal -->
-    <div id="nominate-modal" class="fixed inset-0 z-50 hidden bg-stone-900/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-stone-950 rounded-2xl shadow-2xl border border-stone-200 dark:border-stone-800 max-w-lg w-full p-6 space-y-4">
-            <div class="flex justify-between items-center border-b border-stone-200 dark:border-stone-800 pb-3">
-                <h3 class="font-heading font-bold text-stone-900 dark:text-white text-lg">Nominate a Woman Writer</h3>
-                <button onclick="closeNominateModal()" class="text-stone-400 hover:text-stone-600 dark:hover:text-stone-200">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <p class="text-xs text-stone-600 dark:text-stone-400 font-serif">Help us expand this open bibliography. Submit details of Jharkhand women authors, poets, or oral scholars.</p>
-            <form id="nominate-form" onsubmit="handleNominationSubmit(event)" class="space-y-3">
-                <div>
-                    <label class="block text-xs font-medium text-stone-700 dark:text-stone-300">Writer Full Name *</label>
-                    <input type="text" required placeholder="e.g. Soni Soren" class="mt-1 w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs focus:ring-2 focus:ring-terracotta-500">
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <label class="block text-xs font-medium text-stone-700 dark:text-stone-300">Primary Language *</label>
-                        <input type="text" required placeholder="e.g. Santhali" class="mt-1 w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-stone-700 dark:text-stone-300">District *</label>
-                        <input type="text" required placeholder="e.g. Dumka" class="mt-1 w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-stone-700 dark:text-stone-300">Notable Work / Book Title</label>
-                    <input type="text" placeholder="e.g. Baha Mala (2018)" class="mt-1 w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-stone-700 dark:text-stone-300">Brief Biography / Significance</label>
-                    <textarea rows="3" placeholder="Describe her contributions, genre, and background..." class="mt-1 w-full p-2.5 bg-stone-50 dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs"></textarea>
-                </div>
-                <div class="pt-2 flex justify-end space-x-2">
-                    <button type="button" onclick="closeNominateModal()" class="px-4 py-2 border border-stone-300 dark:border-stone-700 rounded-lg text-xs font-medium text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-terracotta-600 hover:bg-terracotta-700 text-white rounded-lg text-xs font-medium">Submit Nomination</button>
-                </div>
-            </form>
+        <div class="p-4 border-t border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-950">
+            <button onclick="clearAllFavorites()" class="w-full py-2.5 bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 rounded-xl text-xs font-semibold transition">Clear All Saved</button>
         </div>
     </div>
 
     <!-- Notification Toast -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-stone-900 text-white px-4 py-3 rounded-xl shadow-xl text-xs font-medium transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-900 px-5 py-3.5 rounded-xl shadow-2xl text-xs font-semibold transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 border border-stone-700 dark:border-stone-300">
         <span id="toast-message">Notification</span>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-stone-900 text-stone-400 py-8 px-4 sm:px-6 lg:px-8 border-t border-stone-800 text-xs mt-auto">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <p class="font-heading font-semibold text-stone-200">Jharkhand Women Writers Archive</p>
-                <p class="mt-1 text-stone-500">Dedicated to indigenous women's literature, oral traditions, and cultural preservation across Jharkhand.</p>
+    <footer class="bg-stone-950 text-stone-400 py-10 px-4 sm:px-6 lg:px-8 border-t border-stone-800 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="space-y-1 text-center md:text-left">
+                <p class="font-heading font-bold text-stone-200 text-sm">Jharkhand Women Writers Archive</p>
+                <p class="text-stone-500 max-w-lg">Dedicated to indigenous women's literature, oral traditions, and cultural preservation across Jharkhand's 24 districts.</p>
             </div>
-            <div class="text-right text-stone-500">
-                <p>All names, biographies, and titles rendered in standard English transliteration.</p>
-                <p class="mt-0.5">© 2026 Digital Cultural Initiative. Open Literary Archive.</p>
+            <div class="text-center md:text-right text-stone-500 space-y-1">
+                <p>All names, biographies, and titles rendered in standard transliteration.</p>
+                <p class="text-stone-400 font-medium">© 2026 Digital Cultural Initiative. Source-checked literary archive.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Data Store containing 55+ Jharkhand Women Writers strictly using English text
-        const writersData = [
-            {
-                id: "joba-murmu",
-                name: "Joba Murmu",
-                language: "Santhali",
-                district: "East Singhbhum",
-                era: "1970s - Present",
-                subtitle: "Sahitya Akademi Bal Sahitya Puraskar Laureate & Translator",
-                bgGradient: "from-amber-600 to-terracotta-700",
-                bio: "Joba Murmu is a pioneering Santhali writer, educator, and translator based in Karandih, Jamshedpur. She received the prestigious Sahitya Akademi Bal Sahitya Puraskar in 2017 for her short story collection 'Olon Baha'. She holds degrees in Hindi and Santhali literature and has been instrumental in translating major world classics like Rabindranath Tagore's Gitanjali into Santhali (Ol Chiki script).",
-                quote: "Literature is the quiet mirror in which the forest and the indigenous soul reflect their endurance.",
-                books: [
-                    { title: "Olon Baha", year: "2014", publisher: "Santhali Literary Society", genre: "Short Stories", description: "Award-winning collection of short stories depicting rural Santhal family life and children's folklore." },
-                    { title: "Baha Umul", year: "2018", publisher: "Tribal Language Press", genre: "Poetry", description: "Lyrical poetry exploring women's connection with the forest ecosystem and seasonal festivals." },
-                    { title: "Gitanjali (Santhali Translation)", year: "2010", publisher: "Sahitya Akademi", genre: "Translation", description: "Acclaimed translation of Rabindranath Tagore's Nobel-winning verses into Santhali." }
-                ]
-            },
-            {
-                id: "alice-ekka",
-                name: "Alice Ekka",
-                language: "Kurukh",
-                district: "Ranchi",
-                era: "1917 - 1978",
-                subtitle: "First Adivasi Woman Story Writer of India",
-                bgGradient: "from-emerald-700 to-teal-800",
-                bio: "Alice Ekka is historically acknowledged as the first Adivasi woman short story writer in India. Writing actively during the 1950s to 1970s, her stories were published in prominent journals like 'Adivasi Patrika'. Her works provided nuanced portrayals of tribal womanhood, identity, displacement, and social justice in Chota Nagpur.",
-                quote: "To speak of the forest is not a metaphor for us; it is our living breath and ancestral memory.",
-                books: [
-                    { title: "Alice Ekka Ki Kahaniyan", year: "Compiled 2015", publisher: "Radhakrishna Prakashan", genre: "Short Stories", description: "Posthumous definitive collection of her groundbreaking stories written between 1950 and 1975." },
-                    { title: "Koyel Ki Kook", year: "1962", publisher: "Adivasi Sahitya Parishad", genre: "Fiction", description: "A tender story examining social transition and women's agency in rural Chota Nagpur." }
-                ]
-            },
-            {
-                id: "jasoda-devi",
-                name: "Jasoda Devi",
-                language: "Nagpuri",
-                district: "Gumla",
-                era: "1920s - 1990s",
-                subtitle: "Pioneer of Folk Drama and Nagpuri Poetry",
-                bgGradient: "from-terracotta-600 to-rose-800",
-                bio: "Jasoda Devi was an early trailblazer in Nagpuri and Sadri folk literature. Hailing from Gumla district, her songs and folk plays captured the agrarian rhythms, women's labor, and communal oral heritage of Chota Nagpur.",
-                quote: "Our songs are woven into the soil; when we sing, the hills remember who we are.",
-                books: [
-                    { title: "Nagpuri Jhumar Geet", year: "1968", publisher: "Ranchi Book Depot", genre: "Folk Poetry", description: "Collection of traditional and original festive songs performed during Karma and Sarhul." },
-                    { title: "Chota Nagpur Aangan", year: "1975", publisher: "Jharkhand Bhasha Sansthan", genre: "Poetry", description: "Poems chronicling female solidarity and rural daily existence." }
-                ]
-            },
-            {
-                id: "vasavi-kiro",
-                name: "Vasavi Kiro",
-                language: "Hindi",
-                district: "Ranchi",
-                era: "1960s - Present",
-                subtitle: "Journalist, Feminist Scholar & Cultural Activist",
-                bgGradient: "from-stone-700 to-terracotta-800",
-                bio: "Vasavi Kiro is a leading feminist author, senior journalist, and activist from Ranchi. She has written extensively on indigenous women's land rights, eco-feminism, and socio-political history in Jharkhand, serving as a former member of the Jharkhand State Commission for Women.",
-                quote: "Indigenous women are the true custodians of biodiversity and ancestral wisdom.",
-                books: [
-                    { title: "Adivasi Stree Astitva Aur Vinaash", year: "2008", publisher: "Anamika Publishers", genre: "Non-Fiction / Essays", description: "Socio-political treatise on displacement, industrialization, and indigenous women." },
-                    { title: "Ulgulan Ke Geet", year: "2014", publisher: "Jharkhand Bhasha Sahitya Sanskriti Manch", genre: "Cultural History", description: "Historical account of women's leadership in anti-colonial tribal rebellions." }
-                ]
-            },
-            {
-                id: "damayanti-beshra",
-                name: "Damayanti Beshra",
-                language: "Santhali",
-                district: "Mayurbhanj / East Singhbhum",
-                era: "1962 - Present",
-                subtitle: "Padma Shri Awardee & Santhali Poet",
-                bgGradient: "from-ochre-600 to-terracotta-700",
-                bio: "Dr. Damayanti Beshra is a distinguished Santhali language scholar, poet, and Padma Shri recipient (2020). She published 'Jiwi Jharna' in 1994, recognized as the first poetry anthology published by a Santhali woman writer.",
-                quote: "The pen in a woman's hand carries the strength of an entire forest stream.",
-                books: [
-                    { title: "Jiwi Jharna", year: "1994", publisher: "Santhali Sahitya Baisi", genre: "Poetry", description: "Historic poetry collection celebrating Santhal philosophy, identity, and nature." },
-                    { title: "Santhali Sahittya Re Naree", year: "2005", publisher: "Kolkata Literary Press", genre: "Literary Criticism", description: "Critical study analyzing the representation of women in oral and written Santhali literature." }
-                ]
-            },
-            {
-                id: "jacinta-kerketta",
-                name: "Jacinta Kerketta",
-                language: "Hindi",
-                district: "West Singhbhum",
-                era: "1983 - Present",
-                subtitle: "Internationally Acclaimed Poet & Journalist",
-                bgGradient: "from-emerald-800 to-forest-900",
-                bio: "Jacinta Kerketta, hailing from Khudang village in West Singhbhum, is one of contemporary India's most prominent young indigenous poets and journalists. Her bilingual poetry collections have been translated into German, Italian, English, and French, articulating indigenous resistance, forest preservation, and human rights.",
-                quote: "Where trees are uprooted, memory itself becomes a act of defiance.",
-                books: [
-                    { title: "Angor (Embers)", year: "2016", publisher: "Adivani Press", genre: "Poetry", description: "Powerful collection confronting industrial exploitation, displacement, and tribal resilience." },
-                    { title: "Jadd (Roots)", year: "2018", publisher: "Radhakrishna Prakashan", genre: "Poetry", description: "Meditative poems on indigenous identity, sacred groves, and motherland." },
-                    { title: "Iwaro", year: "2022", publisher: "Westland Books", genre: "Poetry", description: "Focusing on indigenous women's intimate struggles and connection with ecological survival." }
-                ]
-            },
-            {
-                id: "rose-kerketta",
-                name: "Rose Kerketta",
-                language: "Kharia",
-                district: "Simdega",
-                era: "1940 - 2018",
-                subtitle: "Kharia Folklorist, Linguist & Short Story Pioneer",
-                bgGradient: "from-stone-800 to-emerald-900",
-                bio: "Dr. Rose Kerketta was an eminent scholar, thinker, and writer in Kharia and Hindi. She dedicated her life to documenting Kharia folklore, grammar, and oral tales, serving as a faculty member at Ranchi University's Department of Tribal and Regional Languages.",
-                quote: "When a language falls silent, a unique worldview perishes forever.",
-                books: [
-                    { title: "Khela", year: "2002", publisher: "Kharia Literary Society", genre: "Short Stories", description: "Explores social changes and moral resilience among Kharia tribal communities." },
-                    { title: "Kharia Lokstories & Traditions", year: "1998", publisher: "Tribal Research Institute", genre: "Folklore Study", description: "Comprehensive documentation of ancient Kharia myths, songs, and customs." }
-                ]
-            },
-            {
-                id: "grace-kujur",
-                name: "Grace Kujur",
-                language: "Kurukh",
-                district: "Ranchi",
-                era: "1949 - Present",
-                subtitle: "Radio Playwright, Poet & Educator",
-                bgGradient: "from-blue-700 to-indigo-900",
-                bio: "Grace Kujur is a respected Kurukh and Hindi poet, playwright, and former Director at All India Radio, Ranchi. Her radio plays and poetry emphasize social reform, girls' education, and tribal language empowerment.",
-                quote: "Words broadcasting over the hills carry hope to the furthest valley.",
-                books: [
-                    { title: "Kalam Ugai Re", year: "2005", publisher: "Ranchi Sahitya Kendra", genre: "Poetry", description: "Poetry collection on women's empowerment, literacy, and indigenous dignity." },
-                    { title: "Mahua Ka Phool", year: "2012", publisher: "Adivasi Vani", genre: "Drama / Radio Plays", description: "Collection of broadcast plays addressing rural healthcare and education." }
-                ]
-            },
-            {
-                id: "nirmala-putul",
-                name: "Nirmala Putul",
-                language: "Santhali",
-                district: "Dumka",
-                era: "1972 - Present",
-                subtitle: "Celebrated Santhali Poet & Social Activist",
-                bgGradient: "from-terracotta-700 to-amber-800",
-                bio: "Nirmala Putul was born in Dudhani village, Dumka. Originally trained as a nurse, her raw and soul-stirring Santhali poetry translated into Hindi brought international attention to the plight and fortitude of Santhal women.",
-                quote: "Do you know what lies inside a woman's quiet heart? A river waiting to carve its own path.",
-                books: [
-                    { title: "Nagpasa Ki Tarah Badi Hoti Kavita", year: "2004", publisher: "Prajawani Publications", genre: "Poetry", description: "Striking verse probing gender inequality, tribal displacement, and love." },
-                    { title: "Apne Ghar Ki Talash Mein", year: "2001", publisher: "Radhakrishna Prakashan", genre: "Poetry", description: "Poetic search for sanctuary, home, and identity amidst social turmoil." }
-                ]
-            },
-            {
-                id: "vandana-tete",
-                name: "Vandana Tete",
-                language: "Kharia",
-                district: "Simdega / Ranchi",
-                era: "1967 - Present",
-                subtitle: "Cultural Theorist, Publisher & Indigenous Activist",
-                bgGradient: "from-teal-800 to-stone-900",
-                bio: "Vandana Tete is a prominent theorist of 'Adivasiyat' (Indigenous Philosophy), editor, and publisher. Founder of Pyara Kerketta Foundation, she has pioneered indigenous publishing and literary festivals in Jharkhand.",
-                quote: "Adivasiyat is not merely an ethnicity; it is a sustainable philosophy for living in harmony with nature.",
-                books: [
-                    { title: "Adivasiyat Ka Sahitya Sastra", year: "2012", publisher: "Pyara Kerketta Foundation", genre: "Literary Theory", description: "Foundational treatise outlining the philosophy and aesthetics of indigenous literature." },
-                    { title: "Asur Kavita", year: "2016", publisher: "Jharkhand Bhasha Sahitya Manch", genre: "Edited Anthology", description: "Collection highlighting poetry from endangered indigenous groups." }
-                ]
-            },
-            {
-                id: "sushila-samad",
-                name: "Sushila Samad",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1906 - 1960",
-                subtitle: "First Adivasi Woman Hindi Poet & Freedom Era Editor",
-                bgGradient: "from-amber-700 to-yellow-900",
-                bio: "Sushila Samad was a historic literary figure who edited the magazine 'Chandni' in the 1930s. She was among the earliest educated Mundari women to write published Hindi poetry during the Indian independence movement.",
-                quote: "My voice belongs to the ancient hills, unbending and free.",
-                books: [
-                    { title: "Pragya Parichay", year: "1935", publisher: "Chandni Press Ranchi", genre: "Poetry Collection", description: "Historic early poetry addressing national awakening and women's upliftment." },
-                    { title: "Karuna Megh", year: "1948", publisher: "Chota Nagpur Literary Guild", genre: "Poetry", description: "Reflective poems on peace, village harmony, and spirituality." }
-                ]
-            },
-            {
-                id: "salge-hansdah",
-                name: "Salge Hansdah",
-                language: "Santhali",
-                district: "East Singhbhum",
-                era: "1989 - Present",
-                subtitle: "Sahitya Akademi Yuva Puraskar Winner (2022)",
-                bgGradient: "from-terracotta-600 to-orange-700",
-                bio: "Salge Hansdah is an acclaimed young Santhali novelist from Barigora, Jamshedpur. She received the Sahitya Akademi Yuva Puraskar in 2022 for her debut novel 'Janam Diham', which depicts village land displacement due to industrial expanding.",
-                quote: "Losing one's ancestral village is not just losing land; it is losing one's shadow.",
-                books: [
-                    { title: "Janam Diham", year: "2018", publisher: "Santhali Academy Press", genre: "Novel", description: "Critically acclaimed novel about urbanization overtaking tribal agrarian hamlets." },
-                    { title: "Sagun Katha", year: "2021", publisher: "Jamshedpur Literary Forum", genre: "Short Fiction", description: "Stories exploring youth aspiration and traditional Santhal ethics." }
-                ]
-            },
-            {
-                id: "damayanti-sinku",
-                name: "Damayanti Sinku",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1965 - Present",
-                subtitle: "Warang Chiti Ho Language Scholar",
-                bgGradient: "from-forest-800 to-emerald-900",
-                bio: "Damayanti Sinku is a dedicated scholar and creative writer in Ho language utilizing the Warang Chiti script. Her work centers on preserving Ho folklore, festive songs, and children's instructional stories.",
-                quote: "Our scripts are the keyways that unlock ancestral wisdom for future generations.",
-                books: [
-                    { title: "Ho Hayam Arang", year: "2008", publisher: "Ho Sahitya Parishad", genre: "Poetry & Songs", description: "Collection of traditional and modern Ho songs set to traditional rhythms." },
-                    { title: "Warang Chiti Reader", year: "2014", publisher: "Chaibasa Language Center", genre: "Linguistics", description: "Instructional literature promoting literacy in the native Ho script." }
-                ]
-            },
-            {
-                id: "shakuntala-mishra",
-                name: "Shakuntala Mishra",
-                language: "Nagpuri",
-                district: "Ranchi",
-                era: "1952 - Present",
-                subtitle: "Nagpuri Linguist, Scholar & Essayist",
-                bgGradient: "from-purple-800 to-indigo-900",
-                bio: "Dr. Shakuntala Mishra is an authority on Nagpuri literature and language structure. Former professor at Ranchi University, she has authored dictionaries, literary histories, and cultural essays.",
-                quote: "Nagpuri is the sweet bridge that unites all communities across the Chota Nagpur plateau.",
-                books: [
-                    { title: "Nagpuri Bhasha Aur Sahitya", year: "1996", publisher: "Jharkhand Bhasha Sansthan", genre: "Literary History", description: "Definitive historical textbook on Nagpuri literary traditions." },
-                    { title: "Chota Nagpur Ke Lokgeet", year: "2005", publisher: "Ranchi University Press", genre: "Folklore Analysis", description: "Analytical compilation of women's folk songs." }
-                ]
-            },
-            {
-                id: "dayamani-barla",
-                name: "Dayamani Barla",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1956 - Present",
-                subtitle: "Grassroots Journalist & Indigenous Rights Advocate",
-                bgGradient: "from-stone-800 to-terracotta-900",
-                bio: "Known as the 'Iron Lady of Jharkhand', Dayamani Barla is a pioneer indigenous journalist and activist. Her writings in regional newspapers have been pivotal in documenting land rights struggles and community governance.",
-                quote: "Our land is not real estate; it is our mother, our history, and our children's future.",
-                books: [
-                    { title: "Luta Jharkhand", year: "2004", publisher: "Jan Hakikaat Press", genre: "Investigative Journalism", description: "Collection of sharp essays on industrial displacement and grassroot resistance." },
-                    { title: "Munda Disham Kahaani", year: "2011", publisher: "Khunti Community Press", genre: "Essays", description: "Personal memoirs and social commentary on Mundari traditional governance." }
-                ]
-            },
-            {
-                id: "sushma-asur",
-                name: "Sushma Asur",
-                language: "Birhor/Asuri/Other",
-                district: "Netarhat / Gumla",
-                era: "1984 - Present",
-                subtitle: "Asur Language Pioneer & Oral Historian",
-                bgGradient: "from-amber-800 to-red-950",
-                bio: "Sushma Asur belongs to the ancient Asur tribe, historically associated with iron metallurgy. She writes poetry and records oral literature to prevent the complete extinction of the Asur language.",
-                quote: "We are the iron-melters of ancient times; our words must not vanish into dust.",
-                books: [
-                    { title: "Asur Adivasi Gatha", year: "2015", publisher: "Endangered Voices Press", genre: "Oral History & Verse", description: "Bilingual collection preserving Asur creation myths, song cycles, and stories." },
-                    { title: "Netarhat Ki Chhaon Mein", year: "2019", publisher: "Jharkhand Bhasha Forum", genre: "Poetry", description: "Poetic musings on the changing ecology of Netarhat plateau." }
-                ]
-            },
-            {
-                id: "ruby-hembrom",
-                name: "Ruby Hembrom",
-                language: "Santhali",
-                district: "Deoghar",
-                era: "1978 - Present",
-                subtitle: "Founder of Adivani & Cultural Archival Author",
-                bgGradient: "from-terracotta-800 to-stone-900",
-                bio: "Ruby Hembrom is a lawyer, writer, and founder of 'adi-vani', an archiving and publishing outlet by and for Indigenous people. She has authored illustrated children's books and essays on Santhal heritage.",
-                quote: "We must write our own stories; otherwise others will continue to misdescribe us.",
-                books: [
-                    { title: "Disom Mandwa", year: "2014", publisher: "Adivani Press", genre: "Children's / Folklore", description: "Illustrated storybook depicting Santhal village life and social architecture." },
-                    { title: "We Come From the Geese: Santhal Creation Myth", year: "2013", publisher: "Adivani Press", genre: "Mythology", description: "Accessible English retellings of Santhal creation narratives." }
-                ]
-            },
-            {
-                id: "ujjwala-jyoti-tigga",
-                name: "Ujjwala Jyoti Tigga",
-                language: "Kurukh",
-                district: "Ranchi",
-                era: "1970 - Present",
-                subtitle: "Kurukh Feminist Poet & Scholar",
-                bgGradient: "from-teal-700 to-emerald-900",
-                bio: "Ujjwala Jyoti Tigga is a prominent Kurukh language writer and academician. Her poetry questions social hierarchies, celebrates tribal sisterhood, and emphasizes women's literacy.",
-                quote: "A woman who reads illuminates three generations of her family.",
-                books: [
-                    { title: "Kurukh Kath-Siri", year: "2009", publisher: "Ranchi Kurukh Parishad", genre: "Poetry", description: "Reflective poems on modern education and Kurukh identity." },
-                    { title: "Jeevan Chhaya", year: "2016", publisher: "Chota Nagpur Literary Society", genre: "Short Stories", description: "Collection of stories exploring city life vs village roots." }
-                ]
-            },
-            {
-                id: "maina-tudu",
-                name: "Maina Tudu",
-                language: "Santhali",
-                district: "East Singhbhum",
-                era: "1984 - Present",
-                subtitle: "Sahitya Akademi Yuva Puraskar Recipient (2017)",
-                bgGradient: "from-ochre-600 to-amber-800",
-                bio: "Maina Tudu is a Santhali poet and writer from Jamshedpur. She received the Yuva Puraskar for her poetry collection 'Marsal Dahar' (The Path of Light), promoting youth education and community ethics.",
-                quote: "Light does not select which leaves to shine upon; so must knowledge be for every child.",
-                books: [
-                    { title: "Marsal Dahar", year: "2015", publisher: "Santhali Sahitya Forum", genre: "Poetry", description: "Inspirational poetry encouraging literacy and social unity." },
-                    { title: "Santhali Grammar & Usage", year: "2019", publisher: "National Book Trust", genre: "Educational", description: "Guide book for students learning Ol Chiki written Santhali." }
-                ]
-            },
-            {
-                id: "kusum-keshri",
-                name: "Kusum Keshri",
-                language: "Nagpuri",
-                district: "Ranchi",
-                era: "1948 - Present",
-                subtitle: "Nagpuri Novelist & Cultural Researcher",
-                bgGradient: "from-rose-700 to-stone-800",
-                bio: "Kusum Keshri has written extensively in Nagpuri and Hindi. Her fiction chronicles family dynamics, rural poverty, and cultural traditions of central Jharkhand.",
-                quote: "Every dialect contains a hidden palace of history.",
-                books: [
-                    { title: "Premsagar Nagpuri", year: "1992", publisher: "Ranchi Sahitya Bhavan", genre: "Novel", description: "Romantic novel rooted in Nagpuri folk traditions." },
-                    { title: "Maati Ke Rang", year: "2003", publisher: "Jharkhand Akademy", genre: "Essays", description: "Essays on festive customs and culinary heritage." }
-                ]
-            },
-            {
-                id: "anita-devi",
-                name: "Anita Devi",
-                language: "Khortha",
-                district: "Hazaribagh",
-                era: "1975 - Present",
-                subtitle: "Khortha Poet & Folk Song Archivist",
-                bgGradient: "from-emerald-700 to-forest-900",
-                bio: "Anita Devi is a major voice in Khortha literature from Hazaribagh. She has published multiple anthologies of poetry and compiled traditional Khortha wedding and harvesting songs.",
-                quote: "Our dialect Khortha carries the scent of the North Chota Nagpur soil.",
-                books: [
-                    { title: "Khortha Bhasha Phool", year: "2011", publisher: "Hazaribagh Sahitya Manch", genre: "Poetry", description: "Lyrical verses on rural harmony and women's joy." },
-                    { title: "Jhumar Jhankar", year: "2017", publisher: "Khortha Unnayan Parishad", genre: "Folk Songs", description: "Comprehensive anthology of oral Khortha songs." }
-                ]
-            },
-            {
-                id: "premwati-munda",
-                name: "Premwati Munda",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1960 - Present",
-                subtitle: "Mundari Oral Historian & Playwright",
-                bgGradient: "from-terracotta-700 to-stone-800",
-                bio: "Premwati Munda has devoted decades to collecting Mundari oral narratives and dramatizing historical events such as the Birsa Munda movement for young audiences.",
-                quote: "Birsa's memory lives not just in stone monuments, but in every spoken Mundari word.",
-                books: [
-                    { title: "Birsa Munda Gatha", year: "2002", publisher: "Khunti Cultural Society", genre: "Historical Drama", description: "Play depicting the Ulgulan movement from a woman's vantage point." },
-                    { title: "Mundari Saahityar Roop", year: "2010", publisher: "Tribal Language Institute", genre: "Folklore", description: "Documentation of ancient Mundari riddle stories and parables." }
-                ]
-            },
-            {
-                id: "kuhu-dular-hansda",
-                name: "Kuhu Dular Hansda",
-                language: "Santhali",
-                district: "Dumka",
-                era: "1980 - Present",
-                subtitle: "Santhali Lyricist & Short Story Writer",
-                bgGradient: "from-ochre-600 to-terracotta-800",
-                bio: "Kuhu Dular Hansda writes emotive short stories and lyrics celebrating traditional Santhal dance forms, seasonal rhythms, and youth aspirations in Dumka.",
-                quote: "The Madal drum beats like the steady pulse of our community.",
-                books: [
-                    { title: "Rimil", year: "2013", publisher: "Santhal Pargana Press", genre: "Short Stories", description: "Tales of monsoon rains, love, and village celebrations." },
-                    { title: "Sereng Mala", year: "2019", publisher: "Dumka Sahitya Parishad", genre: "Lyrics & Songs", description: "Modern lyrics written for traditional Santhali acoustic music." }
-                ]
-            },
-            {
-                id: "nirmala-minz",
-                name: "Nirmala Minz",
-                language: "Kurukh",
-                district: "Ranchi",
-                era: "1968 - Present",
-                subtitle: "Professor of Tribal Languages & Kurukh Linguist",
-                bgGradient: "from-teal-800 to-blue-900",
-                bio: "Dr. Nirmala Minz is an esteemed academic at Ranchi University specializing in Kurukh linguistic structures, folklore preservation, and lexicography.",
-                quote: "Grammar is the skeleton of a language; its living spirit is found in the mother's lullaby.",
-                books: [
-                    { title: "Kurukh Grammar & Dictionary", year: "2007", publisher: "Ranchi University Press", genre: "Linguistics", description: "Standard reference dictionary and grammar guide for Kurukh learners." },
-                    { title: "Kurukh Oral Tales", year: "2015", publisher: "Tribal Research Center", genre: "Folklore", description: "Transcribed oral stories collected across Ranchi and Gumla districts." }
-                ]
-            },
-            {
-                id: "anita-boipai",
-                name: "Anita Boipai",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1982 - Present",
-                subtitle: "Ho Cultural Essayist & Story Writer",
-                bgGradient: "from-forest-800 to-stone-900",
-                bio: "Anita Boipai, based in Chaibasa, writes short fiction and cultural essays exploring modern challenges faced by Ho tribal youth balancing urban careers and tribal heritage.",
-                quote: "Rootedness gives us the courage to fly into any sky.",
-                books: [
-                    { title: "Mage Porob Katha", year: "2012", publisher: "Ho Sahitya Manch", genre: "Cultural Fiction", description: "Stories centered around the sacred Mage festival of the Ho community." },
-                    { title: "Chaibasa Chhaya", year: "2018", publisher: "Singhbhum Press", genre: "Essays", description: "Personal essays on urban transformation in tribal lands." }
-                ]
-            },
-            {
-                id: "kumari-basanti",
-                name: "Kumari Basanti",
-                language: "Nagpuri",
-                district: "Ranchi",
-                era: "1950 - Present",
-                subtitle: "Distinguished Nagpuri Poet & Scholar",
-                bgGradient: "from-rose-800 to-terracotta-900",
-                bio: "Dr. Kumari Basanti is a towering figure in Nagpuri literature. Former head of Tribal & Regional Languages at Ranchi University, she has published dozens of research papers and poetry volumes.",
-                quote: "Poetry is the spring water that bubbles forth from the heart of Chota Nagpur.",
-                books: [
-                    { title: "Nagpuri Geetayan", year: "1990", publisher: "Jharkhand Sahitya Sansthan", genre: "Poetry Anthology", description: "Major compilation of contemporary Nagpuri poetic expressions." },
-                    { title: "Chota Nagpur Ka Lok Sahitya", year: "2001", publisher: "Ranchi University", genre: "Literary Research", description: "Critical research on folk songs, ballads, and folk plays." }
-                ]
-            },
-            {
-                id: "rita-kumari",
-                name: "Rita Kumari",
-                language: "Khortha",
-                district: "Bokaro",
-                era: "1978 - Present",
-                subtitle: "Khortha Dramatist & Story Writer",
-                bgGradient: "from-indigo-800 to-slate-900",
-                bio: "Rita Kumari is a popular playwright and short story writer in Khortha language from Bokaro. Her stage plays focus on female literacy, environmental protection, and anti-dowry awareness.",
-                quote: "When a play is staged in our mother tongue, every heart in the village beats as one.",
-                books: [
-                    { title: "Dahar", year: "2014", publisher: "Bokaro Khortha Parishad", genre: "Drama", description: "Acclaimed play on youth education and community resilience." },
-                    { title: "Mati Ke Bhasha", year: "2019", publisher: "Khortha Sahitya Kendra", genre: "Short Stories", description: "Tales depicting industrial worker families in coal belt regions." }
-                ]
-            },
-            {
-                id: "grace-dungdung",
-                name: "Grace Dungdung",
-                language: "Kharia",
-                district: "Simdega",
-                era: "1962 - Present",
-                subtitle: "Kharia Folk Song Collector & Educator",
-                bgGradient: "from-emerald-800 to-teal-950",
-                bio: "Grace Dungdung is a dedicated researcher and teacher in Simdega. She has spent decades preserving Kharia traditional music, agrarian songs, and folk history.",
-                quote: "Every Kharia folk song contains a map of our ancestral migrations.",
-                books: [
-                    { title: "Kharia Jhumar Sangeet", year: "2006", publisher: "Simdega Cultural Forum", genre: "Musicology", description: "Detailed collection of notations and lyrics of Kharia festive music." },
-                    { title: "Pawan Ki Sarso", year: "2015", publisher: "Adivasi Vani Press", genre: "Poetry", description: "Poetry inspired by the serene hills and rivers of Simdega." }
-                ]
-            },
-            {
-                id: "parvati-purty",
-                name: "Parvati Purty",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1971 - Present",
-                subtitle: "Mundari Novelist & Folklorist",
-                bgGradient: "from-amber-700 to-terracotta-900",
-                bio: "Parvati Purty writes poignant novels in Mundari and Hindi focusing on rural womanhood, forest rights, and indigenous cultural identity.",
-                quote: "The soil remembers every footstep that walked upon it with love.",
-                books: [
-                    { title: "Sasang Badi", year: "2010", publisher: "Khunti Literary Society", genre: "Novel", description: "Moving novel depicting family ties and turmeric harvesting traditions." },
-                    { title: "Karam Katha", year: "2017", publisher: "Mundari Parishad", genre: "Folklore", description: "Retelling of the sacred Karam festival legends." }
-                ]
-            },
-            {
-                id: "rani-murmu",
-                name: "Rani Murmu",
-                language: "Santhali",
-                district: "Jamtara",
-                era: "1988 - Present",
-                subtitle: "Sahitya Akademi Yuva Puraskar Winner (2023)",
-                bgGradient: "from-terracotta-600 to-red-800",
-                bio: "Rani Murmu is an award-winning young Santhali writer from Jamtara district. She won the Sahitya Akademi Yuva Puraskar in 2023 for her powerful short story collection 'Elbaha'.",
-                quote: "Stories are seeds; when planted with truth, they bloom across generations.",
-                books: [
-                    { title: "Elbaha", year: "2020", publisher: "Santhali Sahitya Forum", genre: "Short Stories", description: "Award-winning collection probing contemporary social issues and women's courage." },
-                    { title: "Terang", year: "2023", publisher: "Jamtara Literary Club", genre: "Poetry", description: "Reflective poems on nature, sunrise, and personal rebirth." }
-                ]
-            },
-            {
-                id: "sita-bandra",
-                name: "Sita Bandra",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1976 - Present",
-                subtitle: "Ho Language Educator & Children's Author",
-                bgGradient: "from-forest-800 to-teal-900",
-                bio: "Sita Bandra is a teacher and author who creates primary learning stories in Ho language, promoting early mother-tongue literacy among indigenous children in West Singhbhum.",
-                quote: "When a child reads in her native tongue, her eyes shine with confidence.",
-                books: [
-                    { title: "Hon-Kowa Kahani", year: "2012", publisher: "Chaibasa Education Society", genre: "Children's Book", description: "Illustrated folk stories for young children learning to read in Ho." },
-                    { title: "Singhbhum Ki Beti", year: "2018", publisher: "Ho Bhasha Unnayan", genre: "Short Stories", description: "Inspirational stories about young tribal women overcoming adversity." }
-                ]
-            },
-            {
-                id: "geeta-kumari",
-                name: "Geeta Kumari",
-                language: "Nagpuri",
-                district: "Lohardaga",
-                era: "1981 - Present",
-                subtitle: "Nagpuri Short Story Writer & Journalist",
-                bgGradient: "from-rose-700 to-purple-900",
-                bio: "Geeta Kumari is a Lohardaga-based journalist and fiction writer in Nagpuri. Her stories deal with rural healthcare, women's self-help groups, and local environmental preservation.",
-                quote: "Writing is our way of ensuring rural women's voices are heard in decision-making halls.",
-                books: [
-                    { title: "Gaon Ke Chhor", year: "2015", publisher: "Lohardaga Sahitya Manch", genre: "Short Stories", description: "Realistic stories of women driving rural transformation." },
-                    { title: "Phoolmati", year: "2021", publisher: "Nagpuri Sansthan", genre: "Novella", description: "Heartwarming novella about an artisan woman in Lohardaga." }
-                ]
-            },
-            {
-                id: "shanti-minz",
-                name: "Shanti Minz",
-                language: "Kurukh",
-                district: "Gumla",
-                era: "1965 - Present",
-                subtitle: "Kurukh Spiritual Lyricist & Poet",
-                bgGradient: "from-teal-800 to-emerald-900",
-                bio: "Shanti Minz has authored numerous Kurukh hymns, devotional songs, and nature poems that are widely sung across community gatherings in Gumla and Ranchi.",
-                quote: "Music and prayer in our own language heal the soul like rain on parched land.",
-                books: [
-                    { title: "Kurukh Dandi", year: "2004", publisher: "Gumla Literary Society", genre: "Hymns & Lyrics", description: "Collection of Kurukh spiritual and seasonal folk songs." },
-                    { title: "Sarhul Ke Sangeet", year: "2011", publisher: "Adivasi Vani", genre: "Poetry", description: "Poetic tributes to the blooming Sal flowers and spring festival." }
-                ]
-            },
-            {
-                id: "mariam-soren",
-                name: "Mariam Soren",
-                language: "Santhali",
-                district: "Pakur",
-                era: "1973 - Present",
-                subtitle: "Santhali Folklorist & Essayist",
-                bgGradient: "from-terracotta-700 to-amber-900",
-                bio: "Mariam Soren is a researcher and writer from Pakur district specializing in Santhal customary laws, women's inheritance rights, and seasonal festival lore.",
-                quote: "Customary tradition lives through continuous, respectful dialogue.",
-                books: [
-                    { title: "Santhal Custom & Heritage", year: "2009", publisher: "Pakur Research Forum", genre: "Cultural Non-Fiction", description: "Comprehensive analysis of Santhal social structure and women's roles." },
-                    { title: "Baha Parab Gatha", year: "2016", publisher: "Santhali Literary Guild", genre: "Folklore", description: "Detailed guide to the songs and rituals of the Baha spring festival." }
-                ]
-            },
-            {
-                id: "anjali-kisku",
-                name: "Anjali Kisku",
-                language: "Santhali",
-                district: "Dumka",
-                era: "1986 - Present",
-                subtitle: "Contemporary Santhali Poet & Educator",
-                bgGradient: "from-ochre-700 to-terracotta-800",
-                bio: "Anjali Kisku is an influential contemporary Santhali poet teaching in Dumka. Her poems address modern relationships, women's higher education, and cultural identity.",
-                quote: "Education gives wings, but culture keeps our landing gentle.",
-                books: [
-                    { title: "Mid Bita", year: "2017", publisher: "Santhal Pargana Writers Forum", genre: "Poetry", description: "Modern Santhali poetry on self-discovery and female resilience." },
-                    { title: "Ipil", year: "2022", publisher: "Dumka Literary Circle", genre: "Poetry", description: "Verses reflecting on starry nights, solitary thought, and hope." }
-                ]
-            },
-            {
-                id: "savita-gupta",
-                name: "Savita Gupta",
-                language: "Hindi",
-                district: "Dhanbad",
-                era: "1969 - Present",
-                subtitle: "Coalfield Regional Story Writer",
-                bgGradient: "from-stone-700 to-slate-900",
-                bio: "Savita Gupta writes poignant Hindi short stories capturing the life, struggles, and solidarity of women in the coal mining belts of Dhanbad and Jharia.",
-                quote: "Underneath the coal dust beats a heart full of vibrant colors.",
-                books: [
-                    { title: "Koylanchal Ki Naari", year: "2008", publisher: "Dhanbad Sahitya Parishad", genre: "Short Stories", description: "Stories depicting female mine workers and industrial surroundings." },
-                    { title: "Dhuaan Aur Aakaash", year: "2016", publisher: "Jharkhand Hindi Sansthan", genre: "Fiction", description: "A novel about environmental struggle in mining regions." }
-                ]
-            },
-            {
-                id: "sunita-devi",
-                name: "Sunita Devi",
-                language: "Khortha",
-                district: "Giridih",
-                era: "1980 - Present",
-                subtitle: "Khortha Folk Song Writer & Community Artist",
-                bgGradient: "from-emerald-800 to-forest-900",
-                bio: "Sunita Devi is a prominent Khortha writer from Giridih who has compiled traditional harvesting songs and authored modern social reform poetry.",
-                quote: "Singing together in the fields turns heavy labor into shared joy.",
-                books: [
-                    { title: "Khortha Geetanjali", year: "2013", publisher: "Giridih Khortha Manch", genre: "Folk Poetry", description: "Lyrical collection of agricultural and festive songs." },
-                    { title: "Sohrai Ke Geet", year: "2018", publisher: "Chota Nagpur Sanskriti Press", genre: "Folklore", description: "Documentation of cattle-worship Sohrai festival songs." }
-                ]
-            },
-            {
-                id: "shanti-bodra",
-                name: "Shanti Bodra",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1960 - Present",
-                subtitle: "Pioneer Ho Dramatist & Community Leader",
-                bgGradient: "from-blue-800 to-stone-900",
-                bio: "Shanti Bodra is an acclaimed Ho dramatist from Chaibasa whose plays have been performed extensively during regional cultural gatherings.",
-                quote: "Theatre is the community square where we reflect upon our path.",
-                books: [
-                    { title: "Ho Natak Sanjeevani", year: "2001", publisher: "Chaibasa Theatre Forum", genre: "Drama", description: "Collection of stage plays promoting social solidarity and justice." },
-                    { title: "Disum Aayur", year: "2010", publisher: "Ho Literary Society", genre: "Plays", description: "Historical play celebrating Ho warrior resistance." }
-                ]
-            },
-            {
-                id: "yashoda-murmu",
-                name: "Yashoda Murmu",
-                language: "Santhali",
-                district: "East Singhbhum",
-                era: "1972 - Present",
-                subtitle: "Santhali Fiction Writer & Translator",
-                bgGradient: "from-terracotta-700 to-ochre-800",
-                bio: "Yashoda Murmu writes short stories in Santhali and translates classical Indian literature into Ol Chiki script, serving as an educational consultant in Jamshedpur.",
-                quote: "Translation builds bridges across languages so no wisdom is left behind.",
-                books: [
-                    { title: "Baha Dal", year: "2007", publisher: "Jamshedpur Santhali Parishad", genre: "Short Fiction", description: "Stories of young women navigating urban college life." },
-                    { title: "Panchatantra (Santhali Translation)", year: "2015", publisher: "Education Heritage Press", genre: "Translation", description: "Classic fable translation for Santhali medium schools." }
-                ]
-            },
-            {
-                id: "gita-purti",
-                name: "Gita Purti",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1985 - Present",
-                subtitle: "Ho Youth Poet & Modern Essayist",
-                bgGradient: "from-teal-800 to-indigo-900",
-                bio: "Gita Purti is a vibrant young voice in Ho literature, writing modern free-verse poetry and column articles for regional periodicals.",
-                quote: "Free verse is like the forest wind; it flows wherever truth calls it.",
-                books: [
-                    { title: "Jidda Ho", year: "2018", publisher: "Singhbhum Literary Club", genre: "Poetry", description: "Modern free-verse exploring youth aspirations and identity." },
-                    { title: "Kolsan Disham", year: "2021", publisher: "Chaibasa Press", genre: "Essays", description: "Reflections on forest rights and community preservation." }
-                ]
-            },
-            {
-                id: "sunita-verma",
-                name: "Sunita Verma",
-                language: "Hindi",
-                district: "Ranchi",
-                era: "1971 - Present",
-                subtitle: "Short Fiction Author & Cultural Reviewer",
-                bgGradient: "from-stone-700 to-rose-900",
-                bio: "Sunita Verma writes short stories and literary reviews celebrating Jharkhand's composite culture, urban migration, and inter-generational family ties.",
-                quote: "In the quiet corners of every home lies a story worthy of an epic.",
-                books: [
-                    { title: "Ranchi Junction", year: "2012", publisher: "Jharkhand Reader's Guild", genre: "Short Stories", description: "Collection of stories centered around urban migration and city life." },
-                    { title: "Pahadi Ka Diwa", year: "2019", publisher: "Ranchi Sahitya Kendra", genre: "Fiction", description: "Heartfelt stories set in the serene suburbs of Ranchi." }
-                ]
-            },
-            {
-                id: "pramila-dungdung",
-                name: "Pramila Dungdung",
-                language: "Kharia",
-                district: "Simdega",
-                era: "1979 - Present",
-                subtitle: "Kharia Linguist & Grammar Researcher",
-                bgGradient: "from-emerald-800 to-forest-950",
-                bio: "Pramila Dungdung is a researcher in Kharia language pedagogy, dedicated to developing elementary instructional textbooks in native Kharia dialect.",
-                quote: "Mother tongue instruction gives every child a firm foundation for life.",
-                books: [
-                    { title: "Kharia Standard Reader", year: "2014", publisher: "Simdega Literacy Mission", genre: "Educational", description: "Elementary reader for Kharia language schools." },
-                    { title: "Dordang", year: "2020", publisher: "Kharia Unnayan Samiti", genre: "Folklore", description: "Collection of Kharia traditional riddles and nursery rhymes." }
-                ]
-            },
-            {
-                id: "sushanti-ekka",
-                name: "Sushanti Ekka",
-                language: "Kurukh",
-                district: "Gumla",
-                era: "1983 - Present",
-                subtitle: "Kurukh Novelist & Social Worker",
-                bgGradient: "from-blue-800 to-teal-900",
-                bio: "Sushanti Ekka combines active social work with creative writing, authoring Kurukh short stories and novellas on rural women's health and micro-finance.",
-                quote: "Words accompanied by action can transform an entire village.",
-                books: [
-                    { title: "Tangra Chala", year: "2016", publisher: "Gumla Literary Society", genre: "Novel", description: "Inspirational novel about a women's collective transforming a rural village." },
-                    { title: "Kurukh Katha Mala", year: "2021", publisher: "Adivasi Vikas Press", genre: "Short Stories", description: "Short stories focusing on self-reliance and community education." }
-                ]
-            },
-            {
-                id: "reena-mahto",
-                name: "Reena Mahto",
-                language: "Khortha",
-                district: "Ramgarh",
-                era: "1987 - Present",
-                subtitle: "Khortha Poet & Folk Dramatist",
-                bgGradient: "from-amber-700 to-stone-900",
-                bio: "Reena Mahto writes Khortha poetry and short plays that draw inspiration from the picturesque Damodar river valley and local agricultural traditions.",
-                quote: "The Damodar river sings a different song in every season; so does our poetry.",
-                books: [
-                    { title: "Damodar Par Ke Geet", year: "2017", publisher: "Ramgarh Khortha Sahitya", genre: "Poetry", description: "Poetry celebrating the natural beauty of Ramgarh and Damodar river." },
-                    { title: "Karam Jhumar", year: "2022", publisher: "Khortha Academy", genre: "Folk Plays", description: "Collection of performance plays for harvest festivals." }
-                ]
-            },
-            {
-                id: "tala-tudu",
-                name: "Tala Tudu",
-                language: "Santhali",
-                district: "East Singhbhum",
-                era: "1972 - Present",
-                subtitle: "Sahitya Akademi Translation Prize Winner (2015)",
-                bgGradient: "from-terracotta-600 to-ochre-700",
-                bio: "Tala Tudu is a nurse and prominent Santhali translator based in Jamshedpur. She received the Sahitya Akademi Translation Prize in 2015 for translating Sarat Chandra Chattopadhyay's classic Bengali novel 'Pather Dabi' into Santhali as 'Babanod Sarnew'.",
-                quote: "Literature transcends borders when translated with deep reverence.",
-                books: [
-                    { title: "Babanod Sarnew", year: "2013", publisher: "Sahitya Akademi", genre: "Translation", description: "Award-winning Santhali translation of Sarat Chandra's epic novel Pather Dabi." },
-                    { title: "Santhali Anubad Sanchayan", year: "2019", publisher: "Jamshedpur Press", genre: "Translation Anthology", description: "Collection of translated world stories into Santhali." }
-                ]
-            },
-            {
-                id: "basi-hembram",
-                name: "Basi Hembram",
-                language: "Santhali",
-                district: "Sahibganj",
-                era: "1968 - Present",
-                subtitle: "Santhali Folk Oral Historian",
-                bgGradient: "from-ochre-700 to-red-900",
-                bio: "Basi Hembram is a respected oral historian and author from Sahibganj who has transcribed rare Santhal folk ballads and ancestral migration tales.",
-                quote: "Our ancestors carried their history not in heavy books, but in living memory.",
-                books: [
-                    { title: "Karam Binnti", year: "2005", publisher: "Sahibganj Cultural Press", genre: "Oral Heritage", description: "Full transcription and commentary on Santhal Karam festival chanting." },
-                    { title: "Santhal Hub", year: "2012", publisher: "Santhal Pargana Guild", genre: "Historical Narrative", description: "Oral accounts of the 1855 Santhal Rebellion passed through women." }
-                ]
-            },
-            {
-                id: "suman-munda",
-                name: "Suman Munda",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1982 - Present",
-                subtitle: "Mundari Free-Verse Poet & Essayist",
-                bgGradient: "from-terracotta-800 to-emerald-950",
-                bio: "Suman Munda is an author and educator writing modern Mundari verse exploring youth migration, identity loss, and environmental protection.",
-                quote: "Stand firm like the Sal tree, no matter how hard the urban wind blows.",
-                books: [
-                    { title: "Birsa Disham", year: "2015", publisher: "Khunti Literary Forum", genre: "Poetry", description: "Poetry on preserving tribal heritage amidst modern industrialization." },
-                    { title: "Ayub Baha", year: "2020", publisher: "Mundari Press", genre: "Essays", description: "Reflective essays on nature, youth, and indigenous philosophy." }
-                ]
-            },
-            {
-                id: "poonam-mahto",
-                name: "Poonam Mahto",
-                language: "Khortha",
-                district: "Dhanbad",
-                era: "1985 - Present",
-                subtitle: "Khortha Short Story Writer & Poet",
-                bgGradient: "from-indigo-800 to-stone-900",
-                bio: "Poonam Mahto writes Khortha fiction depicting women's perseverance in the coalfield towns and rural hamlets of Dhanbad.",
-                quote: "Every woman's struggle contains the blueprint of her freedom.",
-                books: [
-                    { title: "Titalpy", year: "2016", publisher: "Dhanbad Khortha Parishad", genre: "Short Stories", description: "Realistic stories of coalfield women and village artisans." },
-                    { title: "Khortha Arang", year: "2021", publisher: "Jharkhand Bhasha Sansthan", genre: "Poetry", description: "Verses celebrating women's work, nature, and festivity." }
-                ]
-            },
-            {
-                id: "sita-birhor",
-                name: "Sita Birhor",
-                language: "Birhor/Asuri/Other",
-                district: "Hazaribagh",
-                era: "1980 - Present",
-                subtitle: "Birhor Oral Heritage Writer",
-                bgGradient: "from-amber-800 to-stone-950",
-                bio: "Sita Birhor belongs to the nomadic Birhor community. She collaborates with linguists to document traditional rope-making songs, forest gathering lore, and Birhor oral tales.",
-                quote: "The deep forest was our home, every vine and bird our companion.",
-                books: [
-                    { title: "Birhor Lok Katha", year: "2017", publisher: "Endangered Language Cell", genre: "Folklore", description: "Documented oral tales and forest songs of the Birhor people." },
-                    { title: "Rope & Wind", year: "2022", publisher: "Tribal Heritage Press", genre: "Memoir / Heritage", description: "Personal memoirs detailing nomadic forest life and transition." }
-                ]
-            },
-            {
-                id: "subhadra-malhar",
-                name: "Subhadra Malhar",
-                language: "Birhor/Asuri/Other",
-                district: "Ramgarh",
-                era: "1978 - Present",
-                subtitle: "Malhar Oral Folklorist & Craft Historian",
-                bgGradient: "from-yellow-800 to-terracotta-900",
-                bio: "Subhadra Malhar belongs to the traditional bell-metal craft community of Malhars. She writes stories and records oral songs tied to brass-crafting and artisan life.",
-                quote: "Molten metal poured into clay moulds holds the spirit of our ancestors.",
-                books: [
-                    { title: "Dhokra Gatha", year: "2016", publisher: "Artisan Guild Press", genre: "Oral Heritage", description: "Oral history of brass metal casters in Chota Nagpur." },
-                    { title: "Mati Aur Kansa", year: "2021", publisher: "Ramgarh Cultural Forum", genre: "Short Stories", description: "Stories about artisan families keeping ancient crafts alive." }
-                ]
-            },
-            {
-                id: "jambira-pingua",
-                name: "Jambira Pingua",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1970 - Present",
-                subtitle: "Ho Script & Folk Poetry Scholar",
-                bgGradient: "from-forest-800 to-emerald-900",
-                bio: "Jambira Pingua is a dedicated author from Chaibasa who writes poetry in Ho language using Warang Chiti and Latin transliterations for broader reader reach.",
-                quote: "Our words are like silver river pebbles, polished by time and love.",
-                books: [
-                    { title: "Ho Bhasha Sanchayan", year: "2006", publisher: "Chaibasa Language Press", genre: "Poetry", description: "Collection of traditional and modern Ho language poems." },
-                    { title: "Warang Chiti Kavita", year: "2015", publisher: "Ho Literary Society", genre: "Poetry", description: "Verses written specifically to promote Warang Chiti script literacy." }
-                ]
-            },
-            {
-                id: "menas-orea",
-                name: "Menas Orea",
-                language: "Mundari",
-                district: "Khunti",
-                era: "1974 - Present",
-                subtitle: "Mundari Short Story Writer & Educationalist",
-                bgGradient: "from-terracotta-700 to-amber-900",
-                bio: "Menas Orea writes engaging short stories and educational books in Mundari, focusing on forest conservation and rural school development.",
-                quote: "To protect the tree is to protect the school where future generations learn.",
-                books: [
-                    { title: "Bir Birsa", year: "2011", publisher: "Khunti Education Press", genre: "Educational Stories", description: "Inspirational stories for children about nature conservation." },
-                    { title: "Munda Sansthan", year: "2018", publisher: "Ranchi Language Guild", genre: "Essays", description: "Essays on traditional village governance systems." }
-                ]
-            },
-            {
-                id: "lily-serniya-kandulna",
-                name: "Lily Serniya Kandulna",
-                language: "Kurukh",
-                district: "Ranchi",
-                era: "1976 - Present",
-                subtitle: "Kurukh Poet & Translator",
-                bgGradient: "from-teal-800 to-slate-900",
-                bio: "Lily Serniya Kandulna is a Kurukh poet and translator who translates classic Hindi and Bengali literature into Kurukh language.",
-                quote: "Poetry is the universal heartbeat spoken in local dialects.",
-                books: [
-                    { title: "Kurukh Kavita Sarita", year: "2013", publisher: "Ranchi Kurukh Parishad", genre: "Poetry", description: "Collection of reflective poems on womanhood and nature." },
-                    { title: "Anubad Suman", year: "2019", publisher: "Tribal Language Press", genre: "Translation", description: "Translations of prominent Indian women poets into Kurukh." }
-                ]
-            },
-            {
-                id: "phoolmani-birua",
-                name: "Phoolmani Birua",
-                language: "Ho",
-                district: "West Singhbhum",
-                era: "1981 - Present",
-                subtitle: "Ho Cultural Essayist & Playwright",
-                bgGradient: "from-forest-900 to-teal-800",
-                bio: "Phoolmani Birua writes plays and essays centered on Ho tribal sports traditions, archery, and youth leadership in Chaibasa.",
-                quote: "Aim your arrow with steady patience and deep love for your land.",
-                books: [
-                    { title: "Sarisora", year: "2015", publisher: "Singhbhum Sports & Culture", genre: "Drama", description: "Play celebrating indigenous archery traditions and youth sports." },
-                    { title: "Ho Disham Kahaani", year: "2020", publisher: "Chaibasa Forum", genre: "Essays", description: "Essays on community festivals and village youth clubs." }
-                ]
-            },
-            {
-                id: "sarita-badaik",
-                name: "Sarita Badaik",
-                language: "Nagpuri",
-                district: "Simdega",
-                era: "1984 - Present",
-                subtitle: "Nagpuri Folk Poet & Singer-Songwriter",
-                bgGradient: "from-rose-800 to-terracotta-900",
-                bio: "Sarita Badaik is a popular Nagpuri poet and folk singer from Simdega. Her poetry collections celebrate the woven textile art and weaver heritage of the Badaik community.",
-                quote: "Every thread on our loom carries a song of our ancestors.",
-                books: [
-                    { title: "Tanti Gatha", year: "2016", publisher: "Simdega Literary Forum", genre: "Poetry", description: "Verses celebrating weaver heritage, looms, and labor." },
-                    { title: "Nagpuri Jhumar Vani", year: "2021", publisher: "Jharkhand Bhasha Parishad", genre: "Folk Lyrics", description: "Compilation of festive dance lyrics." }
-                ]
-            },
-            {
-                id: "malti-baskey",
-                name: "Malti Baskey",
-                language: "Santhali",
-                district: "Dumka",
-                era: "1985 - Present",
-                subtitle: "Santhali Short Story Writer & Activist",
-                bgGradient: "from-ochre-700 to-terracotta-800",
-                bio: "Malti Baskey writes vibrant short stories in Santhali focusing on women's self-help movements, forest produce gathering, and village healthcare in Dumka.",
-                quote: "When women walk together, new roads open up across the hills.",
-                books: [
-                    { title: "Baha Jharna", year: "2017", publisher: "Dumka Sahitya Parishad", genre: "Short Stories", description: "Stories of women's economic collectives in rural Dumka." },
-                    { title: "Santhal Pargana Disham", year: "2022", publisher: "Santhali Press", genre: "Essays", description: "Reflections on tribal land rights and women's healthcare." }
-                ]
-            }
+        // Official 24 Districts of Jharkhand strictly configured
+        const JHARKHAND_24_DISTRICTS = [
+            "Bokaro", "Chatra", "Deoghar", "Dhanbad", "Dumka", 
+            "East Singhbhum", "Garhwa", "Giridih", "Godda", "Gumla", 
+            "Hazaribagh", "Jamtara", "Khunti", "Koderma", "Latehar", 
+            "Lohardaga", "Pakur", "Palamu", "Ramgarh", "Ranchi", 
+            "Sahibganj", "Seraikela Kharsawan", "Simdega", "West Singhbhum"
         ];
 
-        // State Management
+        // Source-checked writer records
+        const writersData = [
+            { id: "joba-murmu", name: "Joba Murmu", language: "Santhali", district: "East Singhbhum", era: "Contemporary", subtitle: "Writer, educator, and translator", bgGradient: "from-amber-600 via-terracotta-600 to-terracotta-800", bio: "Joba Murmu is a Santhali writer from Jamshedpur (East Singhbhum) and recipient of the 2017 Sahitya Akademi Bal Sahitya Puraskar.", books: [{ title: "Olon Baha", year: "2017", publisher: "Sahitya Akademi recognition", genre: "Short Stories", description: "The collection recognised with the Bal Sahitya Puraskar." }, { title: "Seren Anjle", year: "—", publisher: "Sahitya Akademi", genre: "Translation", description: "A Santhali translation of Rabindranath Tagore's Bengali poetry collection Gitanjali." }] },
+            { id: "alice-ekka", name: "Alice Ekka", language: "Hindi", district: "Ranchi", era: "1917–1978", subtitle: "Pioneering Adivasi short-story writer", bgGradient: "from-emerald-700 via-teal-800 to-forest-900", bio: "Alice Ekka was a Hindi writer from Ranchi, widely recognised as a pioneering Adivasi woman storyteller.", books: [{ title: "Alice Ekka Ki Kahaniyan", year: "2015", publisher: "Radhakrishna Prakashan", genre: "Short Stories", description: "Posthumous collection of her stories, edited by Vandana Tete." }] },
+            { id: "rose-kerketta", name: "Rose Kerketta", language: "Kharia and Hindi", district: "Simdega", era: "1940–2025", subtitle: "Writer, educator, and tribal-rights activist", bgGradient: "from-stone-800 via-emerald-900 to-forest-900", bio: "Rose Kerketta was a Kharia and Hindi writer, educator, and leading voice in Jharkhand's tribal-rights movement hailing from Simdega.", books: [{ title: "Pagha Jori-Jori Re Ghaton", year: "2009", publisher: "—", genre: "Short Stories", description: "A Hindi short-story collection centred on Adivasi society and culture." }, { title: "Biruwar Gamchha and Other Stories", year: "2016", publisher: "—", genre: "Short Stories", description: "Stories engaging with tribal life, identity, and social change." }] },
+            { id: "grace-kujur", name: "Grace Kujur", language: "Hindi and Kurukh", district: "Ranchi", era: "Contemporary", subtitle: "Poet, playwright, and broadcaster", bgGradient: "from-blue-700 via-indigo-800 to-stone-900", bio: "Grace Kujur is an Adivasi poet and playwright from Ranchi who served in senior roles at All India Radio.", books: [{ title: "Ek Aur Jani Shikar", year: "2020", publisher: "—", genre: "Poetry", description: "A collection of poems written between 1967 and 2019." }, { title: "Mahua Gira Aadhi Raat", year: "—", publisher: "—", genre: "Radio Drama", description: "A radio play addressing witchcraft and social issues." }] },
+            { id: "nirmala-putul", name: "Nirmala Putul", language: "Santhali and Hindi", district: "Dumka", era: "1972–Present", subtitle: "Poet and Adivasi rights activist", bgGradient: "from-terracotta-700 via-amber-800 to-ochre-900", bio: "Nirmala Putul is a Santhali poet from Dumka whose work explores Adivasi identity, women’s lives, displacement, and land.", books: [{ title: "Apne Ghar Ki Talash Mein", year: "2004", publisher: "—", genre: "Poetry", description: "A bilingual Santhali-Hindi poetry collection." }, { title: "Nagare Ki Tarah Bajti Shabd", year: "2005", publisher: "—", genre: "Poetry", description: "A Hindi poetry collection that brought her wide recognition." }, { title: "Beghar Sapne", year: "2014", publisher: "—", genre: "Poetry", description: "A later collection originally written in Hindi." }] },
+            { id: "vandana-tete", name: "Vandana Tete", language: "Hindi and Kharia", district: "Simdega", era: "1969–Present", subtitle: "Writer, editor, publisher, and cultural activist", bgGradient: "from-teal-800 via-emerald-900 to-stone-900", bio: "Vandana Tete is a prominent Adivasi writer and editor from Simdega whose work advances Indigenous literary and cultural discourse.", books: [{ title: "Purkha Ladake", year: "2005", publisher: "—", genre: "Essays", description: "A published work on Adivasi thought and history." }, { title: "Adivasi Sahitya: Parampara Aur Prayojan", year: "2013", publisher: "—", genre: "Literary Criticism", description: "A study of Adivasi literary traditions and purpose." }, { title: "Alice Ekka Ki Kahaniyan", year: "2015", publisher: "Radhakrishna Prakashan", genre: "Edited Collection", description: "Her edited collection preserving Alice Ekka's stories." }] },
+            { id: "sushila-samad", name: "Sushila Samad", language: "Hindi", district: "West Singhbhum", era: "1906–1960", subtitle: "Poet, journalist, editor, and publisher", bgGradient: "from-amber-700 via-ochre-800 to-terracotta-900", bio: "Sushila Samad was an Adivasi Hindi poet and editor from West Singhbhum, active in the freedom movement and literary public life.", books: [{ title: "Pralap", year: "1935", publisher: "—", genre: "Poetry", description: "Her first published poetry collection." }, { title: "Sapne Ka Sansar", year: "1948", publisher: "—", genre: "Poetry", description: "Her second poetry collection." }] },
+            { id: "salge-hansdah", name: "Salge Hansdah", language: "Santhali", district: "East Singhbhum", era: "1989–Present", subtitle: "Sahitya Akademi Yuva Puraskar recipient", bgGradient: "from-terracotta-600 via-orange-700 to-red-900", bio: "Salge Hansdah is a Santhali writer from East Singhbhum (Jamshedpur area) and won the 2022 Sahitya Akademi Yuva Puraskar.", books: [{ title: "Janam Disom Ujarog Kana", year: "2022", publisher: "—", genre: "Novel", description: "Her debut Santali novel, honoured with the 2022 Yuva Puraskar." }] },
+            { id: "damayanti-sinku", name: "Damayanti Sinku", language: "Ho", district: "West Singhbhum", era: "1961–Present", subtitle: "Ho-language scholar and writer", bgGradient: "from-forest-800 via-emerald-900 to-teal-950", bio: "Dr. Damayanti Sinku is a Ho-language scholar from West Singhbhum and a significant voice in contemporary Adivasi literature.", books: [{ title: "Kaji Buru", year: "2007", publisher: "—", genre: "Dictionary", description: "A Ho-Hindi dictionary." }, { title: "Ho: Ek Parichay", year: "—", publisher: "—", genre: "Language Study", description: "An introduction to the Ho language." }, { title: "Singhbhum Ke Shaheed Ladaka 'Ho'", year: "2015", publisher: "—", genre: "Essays", description: "Essays on people and events in Jharkhand history." }] },
+            { id: "shakuntala-mishra", name: "Shakuntala Mishra", language: "Nagpuri", district: "Gumla", era: "Contemporary", subtitle: "Nagpuri writer, scholar, and lexicographer", bgGradient: "from-purple-800 via-indigo-900 to-stone-900", bio: "Dr. Shakuntala Mishra is a prominent Nagpuri writer from Gumla whose books are used in university-level Nagpuri studies.", books: [{ title: "Nagpuri Sadani Vyakaran", year: "—", publisher: "—", genre: "Grammar", description: "A Nagpuri grammar book." }, { title: "Sadani Nagpuri-Hindi Sabdkosh", year: "—", publisher: "—", genre: "Dictionary", description: "A Nagpuri-Hindi dictionary." }, { title: "Sato Nadi Par", year: "—", publisher: "—", genre: "Fiction", description: "A Nagpuri story included in undergraduate study." }] },
+            { id: "sushma-asur", name: "Sushma Asur", language: "Asuri and Hindi", district: "Gumla", era: "1983–Present", subtitle: "Asur writer and cultural documentarian", bgGradient: "from-amber-800 via-red-900 to-terracotta-950", bio: "Sushma Asur is a writer from Gumla's Asur community whose work contributes to preserving Asuri language and culture.", books: [{ title: "Asur Siring", year: "2010", publisher: "—", genre: "Poetry and Cultural Writing", description: "Described as the first written book of Asur literature." }] },
+            { id: "ruby-hembrom", name: "Ruby Hembrom", language: "English and Santhali", district: "Dumka", era: "Contemporary", subtitle: "Writer, publisher, and cultural practitioner", bgGradient: "from-terracotta-800 via-stone-800 to-stone-950", bio: "Ruby Hembrom is an Adivasi writer with roots in Dumka and founder of adivaani, a platform for Indigenous expression and publishing.", books: [{ title: "Disaibon Hul", year: "—", publisher: "adivaani", genre: "Children's History", description: "A prize-winning children's book on the 1855 Santhal uprising." }, { title: "We Come From the Geese", year: "—", publisher: "adivaani", genre: "Children's Folklore", description: "A retelling of a Santal creation story for young readers." }] },
+            { id: "maina-tudu", name: "Maina Tudu", language: "Santhali", district: "East Singhbhum", era: "Contemporary", subtitle: "Poet, lexicographer, and educator", bgGradient: "from-ochre-700 via-terracotta-800 to-red-950", bio: "Maina Tudu is a Santali poet and educator associated with Karandi in East Singhbhum and recognised for her contribution to Santali literature.", books: [{ title: "Marsal Dahar", year: "2017", publisher: "—", genre: "Poetry", description: "The poetry collection that received the Sahitya Akademi Yuva Puraskar." }, { title: "Ol Chiki Ara Gaban", year: "2014", publisher: "—", genre: "Grammar", description: "A grammar book for learners of the Ol Chiki script." }, { title: "Chirgal", year: "2022", publisher: "—", genre: "Poetry", description: "A Santali poetry collection shortlisted for the 2025 Sahitya Akademi Award." }] },
+            { id: "rani-murmu", name: "Rani Murmu", language: "Santhali", district: "East Singhbhum", era: "1988–Present", subtitle: "Sahitya Akademi Yuva Puraskar recipient", bgGradient: "from-rose-800 via-terracotta-800 to-stone-950", bio: "Rani Murmu is a Santali short-story writer associated with East Singhbhum and a recipient of the 2018 Sahitya Akademi Yuva Puraskar.", books: [{ title: "Hopon Mayak Kukmu", year: "2018", publisher: "—", genre: "Short Stories", description: "The short-story collection recognised with the 2018 Yuva Puraskar." }, { title: "Injag Sangsar", year: "—", publisher: "—", genre: "Short Stories", description: "A published Santali short-story collection." }] },
+            { id: "yashoda-murmu", name: "Yashoda Murmu", language: "Santhali", district: "East Singhbhum", era: "1964–Present", subtitle: "Poet and translator", bgGradient: "from-terracotta-700 via-amber-800 to-ochre-900", bio: "Yashoda Murmu is a Santali writer originally from East Singhbhum whose poetry and translations have been recognised by Sahitya Akademi.", books: [{ title: "Towa Dare", year: "—", publisher: "—", genre: "Poetry", description: "A published Santali poetry collection." }, { title: "Sanwhet Dare", year: "—", publisher: "—", genre: "Poetry", description: "A published Santali poetry collection." }, { title: "Kant Re Jhorka Tahe Kana", year: "—", publisher: "Sahitya Akademi", genre: "Translation", description: "Her Santhali translation of Vinod Kumar Shukla's Hindi novel Deewar Main Ek Khidki Rahti Thi." }] },
+            { id: "tala-tudu", name: "Tala Tudu", language: "Santhali", district: "East Singhbhum", era: "1972–Present", subtitle: "Translator and Sahitya Akademi award recipient", bgGradient: "from-terracotta-600 via-ochre-700 to-amber-900", bio: "Tala Tudu is a Santhali writer and translator from Jamshedpur (East Singhbhum) who received the Sahitya Akademi Translation Prize in 2015.", books: [{ title: "Baplanij", year: "2015", publisher: "—", genre: "Translation", description: "Her award-winning Santhali translation of Sarat Chandra Chattopadhyay's Bengali novel Parineeta." }, { title: "Baha Barge", year: "—", publisher: "—", genre: "Translation", description: "A published work listed by Santali literary organisations." }] },
+            { id: "saro-hansdah", name: "Saro Hansdah", language: "Santhali", district: "Bokaro", era: "Contemporary", subtitle: "Translator and Santali literary editor", bgGradient: "from-emerald-800 via-forest-900 to-stone-900", bio: "Saro Hansdah is a Santali writer and editor from Bokaro who has translated Bengali and Hindi works into Santali.", books: [{ title: "Devdas", year: "2014", publisher: "Sahitya Akademi recognition", genre: "Translation", description: "Her Santali translation of Sarat Chandra Chattopadhyay's Bengali novel, awarded the 2014 Sahitya Akademi Translation Prize." }, { title: "Jharkhand Reyag Hasa Dhuri", year: "—", publisher: "—", genre: "Translation", description: "Her Santali translation of Jharkhand Ki Mitti." }] },
+            { id: "suchitra-hansda", name: "Suchitra Hansda", language: "Santhali", district: "Bokaro", era: "1983–Present", subtitle: "Sahitya Akademi Yuva Puraskar poet", bgGradient: "from-amber-700 via-rose-800 to-stone-900", bio: "Suchitra Hansda is a Santali poet recognised by Sahitya Akademi and associated with Bokaro's literary community.", books: [{ title: "Bera Ahla", year: "2015", publisher: "Sahitya Akademi recognition", genre: "Poetry", description: "The poetry collection that received the 2015 Sahitya Akademi Yuva Puraskar." }] },
+            { id: "damayanti-beshra", name: "Damayanti Beshra", language: "Santhali", district: "East Singhbhum", era: "1962–Present", subtitle: "Padma Shri recipient and Santhali author", bgGradient: "from-ochre-600 via-terracotta-700 to-terracotta-900", bio: "Dr. Damayanti Beshra is a Santali author, poet, and Adivasi researcher whose work has made major contributions to Santali literature across East Singhbhum and Mayurbhanj.", books: [{ title: "Say Sahed", year: "—", publisher: "—", genre: "Poetry", description: "A Sahitya Akademi Award-winning Santali poetry collection." }, { title: "Mala Patam", year: "2014", publisher: "—", genre: "Poetry", description: "A Santali poetry collection shortlisted for the 2019 Bal Sahitya Puraskar." }, { title: "Ror Sanes", year: "2012", publisher: "—", genre: "Linguistics", description: "A work on Santali linguistics." }] },
+            { id: "saroj-kerketta", name: "Saroj Kerketta", language: "Kharia and Hindi", district: "Simdega", era: "Contemporary", subtitle: "Senior Adivasi writer and cultural commentator", bgGradient: "from-stone-700 via-emerald-800 to-stone-900", bio: "Saroj Kerketta is a senior Adivasi writer from Simdega who has written in Kharia and Hindi for decades on Jharkhand's art, literature, and culture.", books: [{ title: "Selected writings on Jharkhand art, literature, and culture", year: "—", publisher: "—", genre: "Essays", description: "Published articles and cultural commentary in Kharia and Hindi." }] },
+            { id: "francisca-kujur", name: "Francisca Kujur", language: "Kurukh and Hindi", district: "Ranchi", era: "1959–Present", subtitle: "Kurukh writer, poet, and translator", bgGradient: "from-blue-800 via-teal-900 to-stone-950", bio: "Dr. Francisca Kujur is a Kurukh writer, poet, and translator from Ranchi who writes in Kurukh and Hindi.", books: [{ title: "Pathan Mena", year: "2013", publisher: "Pratiman Prakashan, Ranchi", genre: "Poetry", description: "A collection of poems in the Kurukh language." }, { title: "Udhiya Ra Pinjara Ta Maina", year: "—", publisher: "—", genre: "Short Stories", description: "A collection of Kurukh short stories." }] },
+            { id: "megha-rani", name: "Dr. Megha Rani", language: "Hindi", district: "Ranchi", era: "Contemporary", subtitle: "Author and human-rights advocate", bgGradient: "from-fuchsia-800 via-rose-900 to-stone-950", bio: "Dr. Megha Rani is a Ranchi-based Hindi author and social activist whose writing engages with women’s empowerment and social justice.", books: [{ title: "Astitva: Ek Nari Ka", year: "—", publisher: "—", genre: "Hindi Literature", description: "A Hindi book focused on a woman's identity and existence." }, { title: "Dhokha: Ek Karz", year: "—", publisher: "—", genre: "Hindi Literature", description: "A published Hindi work by Dr. Megha Rani." }, { title: "Mansik Khel", year: "—", publisher: "—", genre: "Hindi Literature", description: "A published Hindi work by Dr. Megha Rani." }] },
+            { id: "dayamani-barla", name: "Dayamani Barla", language: "Hindi", district: "Gumla", era: "Contemporary", subtitle: "Journalist, author, and Adivasi rights activist", bgGradient: "from-stone-800 via-terracotta-900 to-stone-950", bio: "Dayamani Barla is a Jharkhand journalist and author from Gumla known for writing on Adivasi land, forest, and community rights.", books: [{ title: "Adivasi Adhikar Khatre Mein", year: "—", publisher: "—", genre: "Non-fiction", description: "A book on threats to Adivasi rights." }, { title: "Ek Inch Bhi Jameen Nahi Denge", year: "—", publisher: "—", genre: "Non-fiction", description: "A work on land rights and displacement in Jharkhand." }, { title: "Visthapan Ka Dard", year: "—", publisher: "—", genre: "Non-fiction", description: "Writing on the human impact of displacement." }] },
+            { id: "savitri-devi", name: "Savitri Devi", language: "Hindi", district: "Ranchi", era: "Contemporary", subtitle: "Hindi poet, novelist, and epic writer", bgGradient: "from-violet-800 via-indigo-900 to-stone-950", bio: "Savitri Devi is a Ranchi-based Hindi writer whose work includes poetry, fiction, and long narrative poems.", books: [{ title: "Amriteya Buddha", year: "—", publisher: "—", genre: "Epic Poetry", description: "A Hindi mahakavya centred on the Buddha." }, { title: "Annutare", year: "—", publisher: "—", genre: "Epic Poetry", description: "A Hindi mahakavya engaging with the figure of Karna." }, { title: "Goonga Samudra", year: "—", publisher: "—", genre: "Fiction", description: "A published work by Savitri Devi." }] },
+            { id: "shanti-khalkho", name: "Shanti Khalkho", language: "Kurukh and Hindi", district: "Lohardaga", era: "1963–Present", subtitle: "Kurukh poet and cultural researcher", bgGradient: "from-emerald-700 via-teal-800 to-forest-950", bio: "Shanti Khalkho is a Kurukh writer from Lohardaga who writes in Hindi and Kurukh and has published books and poems on Adivasi culture.", books: [{ title: "Green Jharkhand", year: "—", publisher: "—", genre: "Poetry", description: "A poem published in the Kavi Man Jani Man anthology." }] },
+            { id: "jyoti-lakra", name: "Jyoti Lakra", language: "Kurukh, Hindi and Nagpuri", district: "Khunti", era: "Contemporary", subtitle: "Oraon poet and storyteller", bgGradient: "from-amber-700 via-orange-800 to-terracotta-900", bio: "Jyoti Lakra from Khunti writes poetry and short fiction in Kurukh, Hindi, and Nagpuri, centring Adivasi identity, feminism, and resistance.", books: [{ title: "The Sal Tree Has Fallen", year: "2019", publisher: "Kavi Man Jani Man", genre: "Poetry", description: "A poem published in the women’s poetry anthology." }, { title: "Korain Duba", year: "—", publisher: "—", genre: "Short Fiction", description: "A recorded short story by Jyoti Lakra." }] },
+            { id: "angelina-tigga", name: "Angelina Tigga", language: "Kurukh", district: "Ranchi", era: "1909–", subtitle: "Oraon writer and public leader", bgGradient: "from-rose-700 via-red-800 to-stone-900", bio: "Angelina Tigga was an Oraon woman writer, political leader, and the first tribal woman member of the Rajya Sabha from Ranchi.", books: [{ title: "Oraon writings and public addresses", year: "—", publisher: "—", genre: "Prose", description: "Her writing and public work are remembered in Oraon community histories." }] },
+            { id: "pyari-tuti", name: "Pyari Tuti", language: "Mundari", district: "Khunti", era: "Contemporary", subtitle: "Mundari poet", bgGradient: "from-sky-700 via-blue-800 to-stone-900", bio: "Pyari Tuti is a Munda poet from Khunti who writes in Mundari; her poetry has appeared in Adivasi periodicals and radio broadcasts.", books: [{ title: "Kavi Man Jani Man", year: "2019", publisher: "Edited by Vandana Tete", genre: "Poetry Anthology", description: "An anthology containing her poetry." }] },
+            { id: "parvati-tirkey", name: "Parvati Tirkey", language: "Hindi and Kurukh", district: "Gumla", era: "Contemporary", subtitle: "Poet of land, labour, and memory", bgGradient: "from-lime-700 via-green-800 to-forest-950", bio: "Parvati Tirkey is a poet from Gumla whose work draws on Kurukh life, land, and Adivasi memory.", books: [{ title: "Phir Ugna", year: "2024", publisher: "—", genre: "Poetry", description: "Poetry collection recognised with the 2025 Sahitya Akademi Yuva Puraskar." }] },
+            { id: "ujjwala-jyoti-tigga", name: "Ujjwala Jyoti Tigga", language: "Hindi", district: "Ranchi", era: "Contemporary", subtitle: "Oraon writer and poet", bgGradient: "from-fuchsia-700 via-purple-800 to-stone-950", bio: "Ujjwala Jyoti Tigga is an Oraon writer and poet from Ranchi whose work engages with Adivasi history, struggle, and cultural memory.", books: [{ title: "Dharti Ke Anaam Yoddha", year: "—", publisher: "—", genre: "Prose", description: "A published work on Adivasi resistance and remembrance." }, { title: "Kavi Man Jani Man", year: "2019", publisher: "Edited by Vandana Tete", genre: "Poetry Anthology", description: "An anthology containing her poetry." }] },
+            { id: "vasavi-kiro", name: "Vasavi Kiro", language: "Hindi and English", district: "Ranchi", era: "Contemporary", subtitle: "Writer and researcher", bgGradient: "from-cyan-700 via-teal-800 to-stone-950", bio: "Vasavi Kiro is a Ranchi-based writer whose books document Adivasi women, displacement, and social change.", books: [{ title: "Ulgulan Ki Auratein", year: "—", publisher: "—", genre: "Non-fiction", description: "A study of women in the Ulgulan tradition." }, { title: "Glory of Mahua", year: "—", publisher: "—", genre: "Non-fiction", description: "A published work by Vasavi Kiro." }] },
+            { id: "bitiya-murmu", name: "Bitiya Murmu", language: "Santhali and Hindi", district: "Dumka", era: "Contemporary", subtitle: "Santali prose writer", bgGradient: "from-yellow-700 via-amber-800 to-terracotta-900", bio: "Bitiya Murmu is a Santali prose writer and community worker from Dumka whose writing addresses women’s lives and social reform.", books: [{ title: "Adivasi Sanskriti aur Stri", year: "—", publisher: "—", genre: "Essay", description: "An essay on Adivasi culture and women." }, { title: "Story of witch-hunting", year: "2013", publisher: "JAGWAR Santali Literary Meet", genre: "Short Fiction", description: "A story read at the Santali literary meet." }] },
+            { id: "ivy-imogene-hansdak", name: "Ivy Imogene Hansdak", language: "English, Hindi and Santhali", district: "Dumka", era: "Contemporary", subtitle: "Santal poet and translator", bgGradient: "from-indigo-700 via-violet-800 to-stone-950", bio: "Dr. Ivy Imogene Hansdak is a Santal poet from Dumka, translator, and editor of The Johar Journal.", books: [{ title: "The Prism of Life", year: "2022", publisher: "Writers Workshop", genre: "Poetry", description: "A collection of forty-four poems." }, { title: "The Golden Chord", year: "2010", publisher: "Writers Workshop", genre: "Poetry", description: "Her earlier poetry collection." }] },
+            { id: "parvati-murmu", name: "Parvati Murmu", language: "Santhali", district: "Pakur", era: "Contemporary", subtitle: "Santali poet and storyteller", bgGradient: "from-orange-700 via-red-800 to-stone-950", bio: "Parvati Murmu is a Santali woman writer from Pakur whose poems and short stories have been featured in Sahitya Akademi programmes.", books: [{ title: "Selected Santali poems and short stories", year: "2002", publisher: "Sahitya Akademi programme", genre: "Poetry and Fiction", description: "Work presented in a Santali literary reading." }] },
+            { id: "jasada-murmu", name: "Jasada Murmu", language: "Santhali", district: "Jamtara", era: "Contemporary", subtitle: "Santali writer", bgGradient: "from-emerald-700 via-green-800 to-stone-950", bio: "Jasada Murmu is a Santali woman writer from Jamtara whose work has been presented in Sahitya Akademi literary programmes.", books: [{ title: "Selected Santali writings", year: "2008", publisher: "Sahitya Akademi programme", genre: "Literature", description: "Work read in a programme of Santali women writers." }] },
+            { id: "lalibiti-murmu", name: "Lalibiti Murmu", language: "Santhali", district: "Sahibganj", era: "Contemporary", subtitle: "Santali writer", bgGradient: "from-pink-700 via-rose-800 to-stone-950", bio: "Lalibiti Murmu is a Santali woman writer from Sahibganj represented in Sahitya Akademi programmes for Santali women’s writing.", books: [{ title: "Selected Santali writings", year: "2008", publisher: "Sahitya Akademi programme", genre: "Literature", description: "Work read in a programme of Santali women writers." }] },
+            { id: "madhumita-hansda", name: "Madhumita Hansda", language: "Santhali", district: "Deoghar", era: "Contemporary", subtitle: "Santali poet and storyteller", bgGradient: "from-violet-700 via-purple-800 to-stone-950", bio: "Madhumita Hansda is a Santali writer from Deoghar whose poems and short stories have appeared in a Sahitya Akademi literary reading.", books: [{ title: "Selected Santali poems and short stories", year: "2002", publisher: "Sahitya Akademi programme", genre: "Poetry and Fiction", description: "Work presented in a Santali literary reading." }] },
+            { id: "khuku-hansda", name: "Khuku Hansda", language: "Santhali", district: "Godda", era: "Contemporary", subtitle: "Santali poet and storyteller", bgGradient: "from-blue-700 via-indigo-800 to-stone-950", bio: "Khuku Hansda is a Santali writer from Godda whose poems and short stories were presented in a Sahitya Akademi programme.", books: [{ title: "Selected Santali poems and short stories", year: "2002", publisher: "Sahitya Akademi programme", genre: "Poetry and Fiction", description: "Work presented in a Santali literary reading." }] },
+            { id: "chinmayee-hansdah-marandi", name: "Chinmayee Hansdah (Marandi)", language: "Santhali", district: "East Singhbhum", era: "Contemporary", subtitle: "Santali poet and social reformer", bgGradient: "from-teal-700 via-cyan-800 to-stone-950", bio: "Chinmayee Hansdah (Marandi) is a Santali poet and social reformer whose writing is part of the regional Santali literary tradition in East Singhbhum.", books: [{ title: "Omon", year: "2013", publisher: "—", genre: "Poetry", description: "A Santali poetry collection shortlisted for the Sahitya Akademi Award." }, { title: "Potkoj", year: "2005", publisher: "—", genre: "Poetry", description: "A published Santali poetry book." }] },
+            { id: "asha-sushma-kisku", name: "Asha Sushma Kisku", language: "Santhali and Hindi", district: "Hazaribagh", era: "Contemporary", subtitle: "Santali poet", bgGradient: "from-rose-700 via-pink-800 to-stone-950", bio: "Asha Sushma Kisku is a Santali poet from Hazaribagh who first wrote songs and poems in Hindi.", books: [{ title: "Songs and poems in Hindi and Santali", year: "—", publisher: "—", genre: "Poetry", description: "Her bilingual poetic work is noted in surveys of Adivasi women’s writing." }] },
+            { id: "kajal-demta", name: "Kajal Demta", language: "Sadri", district: "Seraikela Kharsawan", era: "Contemporary", subtitle: "Munda writer of songs, stories, and plays", bgGradient: "from-amber-700 via-yellow-800 to-terracotta-950", bio: "Kajal Demta is a Munda woman writer from Seraikela Kharsawan who works across songs, short stories, and plays.", books: [{ title: "Selected songs, stories, and plays", year: "—", publisher: "—", genre: "Mixed genres", description: "Her work spans oral and written literary forms." }] },
+            { id: "holika-kumari-marandi", name: "Holika Kumari Marandi", language: "Santhali", district: "Dumka", era: "Contemporary", subtitle: "Santali short-story writer", bgGradient: "from-lime-700 via-emerald-800 to-forest-950", bio: "Dr. Holika Kumari Marandi is a Santali short-story writer and a teacher of Santali literature in Dumka.", books: [{ title: "Selected Santali short stories", year: "2020", publisher: "Sahitya Akademi Asmita programme", genre: "Short Fiction", description: "Short fiction presented in Sahitya Akademi’s programme for Santali women writers." }] },
+            { id: "sumitra-soren", name: "Sumitra Soren", language: "Santhali", district: "Giridih", era: "Contemporary", subtitle: "Santali short-story writer", bgGradient: "from-sky-700 via-blue-800 to-stone-950", bio: "Sumitra Soren is a Santali writer from Giridih whose short fiction received the Sahitya Akademi Award.", books: [{ title: "Mid Birna Chenne Saon Inag Sagai", year: "2020", publisher: "—", genre: "Short Stories", description: "Short-story collection selected for the 2025 Sahitya Akademi Award." }] },
+            { id: "chaya-mandi", name: "Chaya Mandi", language: "Santhali", district: "Dhanbad", era: "Contemporary", subtitle: "Santali poet and visual presenter", bgGradient: "from-fuchsia-700 via-pink-800 to-stone-950", bio: "Chaya Mandi from Dhanbad composes Santali poems on nature and everyday life, while also documenting folk traditions.", books: [{ title: "Poems of nature and everyday life", year: "—", publisher: "—", genre: "Poetry", description: "Her poetry focuses on natural scenery and social life." }] },
+            { id: "meena-murmu", name: "Meena Murmu", language: "Santhali", district: "Ramgarh", era: "Contemporary", subtitle: "Santali poet and short-story writer", bgGradient: "from-indigo-700 via-blue-800 to-stone-950", bio: "Meena Murmu is a Santali poet and short-story writer from Ramgarh published by Sahitya Akademi.", books: [{ title: "Tawak Tarko", year: "2013", publisher: "Sahitya Akademi", genre: "Short Stories", description: "A collection of Santali short stories." }] },
+            { id: "shakuntala-marndi", name: "Shakuntala Marndi", language: "Santhali", district: "Koderma", era: "Contemporary", subtitle: "Santali poet and social activist", bgGradient: "from-green-700 via-teal-800 to-stone-950", bio: "Shakuntala Marndi is a Santali poet and social activist from Koderma represented in profiles of Santali women writers.", books: [{ title: "Selected Santali poetry", year: "—", publisher: "—", genre: "Poetry", description: "Poetry published and presented within the Santali literary community." }] },
+            { id: "sarojini-beshra", name: "Sarojini Beshra", language: "Santhali", district: "Latehar", era: "Contemporary", subtitle: "Santali writer and poet", bgGradient: "from-orange-700 via-amber-800 to-terracotta-950", bio: "Sarojini Beshra is a Santali writer and poet from Latehar who serves on the Sahitya Akademi Santali Advisory Board.", books: [{ title: "Chando Likhon", year: "2020", publisher: "—", genre: "Poetry", description: "A Santali poetry collection recommended for the 2025 Sahitya Akademi Award." }] },
+            { id: "salge-sarna-hembrom", name: "Salge Sarna Hembrom", language: "Santhali", district: "Chatra", era: "Contemporary", subtitle: "Santali poet", bgGradient: "from-cyan-700 via-blue-800 to-stone-950", bio: "Salge Sarna Hembrom is a Santali writer and poet from Chatra represented in contemporary Santali literary profiles.", books: [{ title: "Selected Santali poetry", year: "—", publisher: "—", genre: "Poetry", description: "Poetry circulated within the Santali literary community." }] },
+            { id: "usha-kiran-attram", name: "Usha Kiran Attram", language: "Hindi", district: "Palamu", era: "Contemporary", subtitle: "Adivasi writer and critic", bgGradient: "from-purple-700 via-violet-800 to-stone-950", bio: "Usha Kiran Attram is an Adivasi woman author and critic from Palamu noted in surveys of indigenous women’s literature.", books: [{ title: "Selected critical writings", year: "—", publisher: "—", genre: "Literary criticism", description: "Critical work in Adivasi literature." }] },
+            { id: "shushila-dhurvey", name: "Shushila Dhurvey", language: "Hindi", district: "Garhwa", era: "Contemporary", subtitle: "Adivasi writer and critic", bgGradient: "from-red-700 via-rose-800 to-stone-950", bio: "Shushila Dhurvey is an Adivasi woman author and critic from Garhwa noted in surveys of indigenous women’s literature.", books: [{ title: "Selected critical writings", year: "—", publisher: "—", genre: "Literary criticism", description: "Critical work in Adivasi literature." }] }
+        ];
+
+        // Global State
         let favorites = JSON.parse(localStorage.getItem('jwwa_favorites') || '[]');
         let selectedLanguage = 'ALL';
         let currentModalWriter = null;
 
-        // Init on DOM Load
+        // Initialize App on DOM Load
         window.addEventListener('DOMContentLoaded', () => {
             initFilters();
             renderWriters();
@@ -1199,19 +420,19 @@
             document.getElementById('stat-writers-count').textContent = writersData.length;
         });
 
-        // Initialize Filter Controls
+        // Setup Filter Dropdowns & Pills
         function initFilters() {
-            // Extract unique languages
+            // Setup Language Pills
             const languages = ['ALL', ...new Set(writersData.map(w => w.language))];
             const pillsContainer = document.getElementById('language-pills');
             pillsContainer.innerHTML = '';
 
             languages.forEach(lang => {
                 const btn = document.createElement('button');
-                btn.className = `px-3 py-1.5 rounded-full text-xs font-medium transition cursor-pointer ${
+                btn.className = `px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                     lang === selectedLanguage 
-                    ? 'bg-terracotta-600 text-white shadow' 
-                    : 'bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300 dark:hover:bg-stone-700'
+                    ? 'bg-terracotta-600 text-white shadow-md shadow-terracotta-600/30' 
+                    : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-700'
                 }`;
                 btn.textContent = lang === 'ALL' ? 'All Languages' : lang;
                 btn.onclick = () => selectLanguage(lang);
@@ -1222,6 +443,7 @@
             const genres = new Set();
             writersData.forEach(w => w.books.forEach(b => genres.add(b.genre)));
             const genreSelect = document.getElementById('genre-filter');
+            genreSelect.innerHTML = '<option value="ALL">All Genres &amp; Literary Forms</option>';
             Array.from(genres).sort().forEach(g => {
                 const opt = document.createElement('option');
                 opt.value = g;
@@ -1229,10 +451,10 @@
                 genreSelect.appendChild(opt);
             });
 
-            // Populate Districts
-            const districts = new Set(writersData.map(w => w.district));
+            // Populate District dropdown strictly with the 24 Jharkhand Districts
             const districtSelect = document.getElementById('district-filter');
-            Array.from(districts).sort().forEach(d => {
+            districtSelect.innerHTML = '<option value="ALL">All 24 Districts of Jharkhand</option>';
+            JHARKHAND_24_DISTRICTS.forEach(d => {
                 const opt = document.createElement('option');
                 opt.value = d;
                 opt.textContent = d;
@@ -1246,7 +468,7 @@
             filterWriters();
         }
 
-        // Main Filtering Function
+        // Filtering Logic
         function filterWriters() {
             const query = document.getElementById('search-input').value.toLowerCase().trim();
             const genre = document.getElementById('genre-filter').value;
@@ -1258,7 +480,7 @@
                 // Language Match
                 if (selectedLanguage !== 'ALL' && w.language !== selectedLanguage) return false;
 
-                // District Match
+                // Strict District Match
                 if (district !== 'ALL' && w.district !== district) return false;
 
                 // Genre Match
@@ -1293,7 +515,7 @@
             selectedLanguage = 'ALL';
             initFilters();
             filterWriters();
-            showToast('All filters reset');
+            showToast('All search & district filters reset');
         }
 
         function updateFilterTags(query, genre, district) {
@@ -1302,8 +524,8 @@
 
             const createTag = (label, onClick) => {
                 const span = document.createElement('span');
-                span.className = 'inline-flex items-center space-x-1 text-xs px-2.5 py-1 bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300 rounded-full font-medium';
-                span.innerHTML = `<span>${label}</span> <button class="hover:text-terracotta-900">&times;</button>`;
+                span.className = 'inline-flex items-center space-x-1 text-xs px-3 py-1 bg-terracotta-100 dark:bg-terracotta-900/40 text-terracotta-800 dark:text-terracotta-300 rounded-full font-semibold border border-terracotta-200 dark:border-terracotta-800';
+                span.innerHTML = `<span>${label}</span> <button class="hover:text-terracotta-950 dark:hover:text-white font-bold ml-1">&times;</button>`;
                 span.querySelector('button').onclick = onClick;
                 container.appendChild(span);
             };
@@ -1314,7 +536,6 @@
             if (query !== '') createTag(`Search: "${query}"`, clearSearch);
         }
 
-        // Helper to get initials monogram
         function getInitials(name) {
             const parts = name.trim().split(' ');
             if (parts.length >= 2) {
@@ -1323,7 +544,7 @@
             return name.substring(0, 2).toUpperCase();
         }
 
-        // Render Writer Cards Grid
+        // Render Cards Grid
         function renderWriters(data = writersData) {
             const grid = document.getElementById('writers-grid');
             const noResults = document.getElementById('no-results');
@@ -1343,13 +564,14 @@
                 const primaryBook = writer.books[0];
 
                 return `
-                <div class="bg-white dark:bg-stone-950 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-stone-200 dark:border-stone-800 overflow-hidden flex flex-col group relative">
-                    <!-- Top Gradient Header with Monogram -->
-                    <div class="h-28 bg-gradient-to-r ${writer.bgGradient} p-4 flex items-start justify-between relative">
-                        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-black/30 text-white backdrop-blur-sm">
+                <div class="bg-white dark:bg-stone-900 rounded-2xl shadow-md hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border border-stone-200/80 dark:border-stone-800 overflow-hidden flex flex-col group relative">
+                    <!-- Card Top Header -->
+                    <div class="h-28 bg-gradient-to-r ${writer.bgGradient} p-4 flex items-start justify-between relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 hero-pattern pointer-events-none"></div>
+                        <span class="relative z-10 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-black/40 text-white backdrop-blur-md border border-white/10">
                             ${writer.language}
                         </span>
-                        <button onclick="toggleFavorite('${writer.id}', event)" class="p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition backdrop-blur-sm" title="${isFav ? 'Remove from Saved' : 'Save Writer'}">
+                        <button onclick="toggleFavorite('${writer.id}', event)" class="relative z-10 p-2.5 rounded-full bg-black/30 hover:bg-black/60 text-white transition-all backdrop-blur-md border border-white/10 shadow-sm" title="${isFav ? 'Remove from Saved' : 'Save Writer'}">
                             <svg class="w-4 h-4 ${isFav ? 'text-red-400 fill-current' : ''}" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                             </svg>
@@ -1357,22 +579,22 @@
                     </div>
 
                     <!-- Monogram Badge Floating -->
-                    <div class="-mt-9 px-5 flex items-end justify-between">
-                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br ${writer.bgGradient} border-4 border-white dark:border-stone-950 shadow-md flex items-center justify-center font-heading font-bold text-white text-xl tracking-wider">
+                    <div class="-mt-9 px-5 flex items-end justify-between relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${writer.bgGradient} border-4 border-white dark:border-stone-900 shadow-lg flex items-center justify-center font-heading font-extrabold text-white text-xl tracking-wider">
                             ${initials}
                         </div>
-                        <span class="text-xs font-medium text-stone-500 dark:text-stone-400">
-                            ${writer.district} District
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700/60">
+                            📍 ${writer.district}
                         </span>
                     </div>
 
                     <!-- Writer Details -->
                     <div class="p-5 flex-grow flex flex-col justify-between space-y-4">
                         <div>
-                            <h3 class="font-heading font-bold text-lg text-stone-900 dark:text-white group-hover:text-terracotta-600 dark:group-hover:text-terracotta-400 transition">
+                            <h3 class="font-heading font-bold text-lg text-stone-900 dark:text-white group-hover:text-terracotta-600 dark:group-hover:text-terracotta-400 transition-colors">
                                 ${writer.name}
                             </h3>
-                            <p class="text-xs font-serif italic text-stone-600 dark:text-stone-400 mt-0.5 line-clamp-1">
+                            <p class="text-xs font-serif italic text-stone-500 dark:text-stone-400 mt-0.5 line-clamp-1">
                                 ${writer.subtitle}
                             </p>
                             <p class="text-xs text-stone-600 dark:text-stone-400 font-serif mt-3 line-clamp-3 leading-relaxed">
@@ -1380,19 +602,22 @@
                             </p>
                         </div>
 
-                        <div class="pt-3 border-t border-stone-100 dark:border-stone-800/80 space-y-2">
-                            <div class="text-xs text-stone-500 dark:text-stone-400 flex items-center justify-between">
-                                <span class="font-medium text-stone-700 dark:text-stone-300">Key Published Work:</span>
-                                <span>${bookCount} Recorded ${bookCount === 1 ? 'Work' : 'Works'}</span>
-                            </div>
-                            <div class="p-2.5 rounded-lg bg-parchment-100/70 dark:bg-stone-900 border border-parchment-200/60 dark:border-stone-800 text-xs">
-                                <span class="font-semibold text-terracotta-800 dark:text-terracotta-400">${primaryBook.title}</span>
-                                <span class="text-stone-500 font-serif"> (${primaryBook.year})</span>
-                                <p class="text-[11px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-0.5">${primaryBook.genre} • ${primaryBook.publisher}</p>
+                        <div class="pt-3 border-t border-stone-100 dark:border-stone-800 space-y-2.5">
+                            <div class="text-[11px] text-stone-500 dark:text-stone-400 flex items-center justify-between font-medium">
+                                <span class="font-bold uppercase tracking-wider text-terracotta-700 dark:text-terracotta-400">Major Work</span>
+                                <span>${bookCount} ${bookCount === 1 ? 'title' : 'titles'}</span>
                             </div>
 
-                            <button onclick="openWriterModal('${writer.id}')" class="w-full mt-2 py-2 px-3 bg-stone-100 dark:bg-stone-900 hover:bg-terracotta-600 hover:text-white dark:hover:bg-terracotta-600 text-stone-800 dark:text-stone-200 rounded-lg text-xs font-medium transition flex items-center justify-center space-x-1">
-                                <span>View Complete Bibliography &amp; Bio</span>
+                            <div class="p-3 rounded-xl bg-parchment-100/70 dark:bg-stone-950 border border-ochre-500/20 text-xs">
+                                <div class="flex items-center justify-between gap-2">
+                                    <span class="font-bold text-stone-900 dark:text-stone-200 line-clamp-1">${primaryBook.title}</span>
+                                    <span class="shrink-0 rounded-full bg-terracotta-100 dark:bg-terracotta-950 px-2 py-0.5 text-[10px] font-bold text-terracotta-800 dark:text-terracotta-300 border border-terracotta-200 dark:border-terracotta-800">${primaryBook.year}</span>
+                                </div>
+                                <p class="text-[11px] text-stone-500 dark:text-stone-400 line-clamp-1 mt-1 font-serif">${primaryBook.genre}</p>
+                            </div>
+
+                            <button onclick="openWriterModal('${writer.id}')" class="w-full mt-2 py-2.5 px-3 bg-stone-100 dark:bg-stone-800 hover:bg-terracotta-600 hover:text-white dark:hover:bg-terracotta-600 text-stone-800 dark:text-stone-200 rounded-xl text-xs font-semibold transition-all flex items-center justify-center space-x-1.5 shadow-sm">
+                                <span>View Full Bibliography &amp; Profile</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -1402,14 +627,14 @@
             }).join('');
         }
 
-        // Writer Modal Handlers
+        // Writer Modal Logic
         function openWriterModal(id) {
             const writer = writersData.find(w => w.id === id);
             if (!writer) return;
 
             currentModalWriter = writer;
 
-            document.getElementById('modal-monogram').className = `w-16 h-16 rounded-xl text-white font-heading font-bold text-2xl flex items-center justify-center shadow-md flex-shrink-0 bg-gradient-to-br ${writer.bgGradient}`;
+            document.getElementById('modal-monogram').className = `w-16 h-16 rounded-2xl text-white font-heading font-bold text-2xl flex items-center justify-center shadow-md flex-shrink-0 bg-gradient-to-br ${writer.bgGradient}`;
             document.getElementById('modal-monogram').textContent = getInitials(writer.name);
             document.getElementById('modal-name').textContent = writer.name;
             document.getElementById('modal-era').textContent = writer.era;
@@ -1418,24 +643,14 @@
             document.getElementById('modal-district').textContent = `District: ${writer.district}`;
             document.getElementById('modal-bio').textContent = writer.bio;
 
-            const quoteBox = document.getElementById('modal-quote-container');
-            if (writer.quote) {
-                quoteBox.classList.remove('hidden');
-                document.getElementById('modal-quote').textContent = writer.quote;
-            } else {
-                quoteBox.classList.add('hidden');
-            }
-
-            // Render Books
             const booksContainer = document.getElementById('modal-books');
             booksContainer.innerHTML = writer.books.map(b => `
-                <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 space-y-1">
+                <div class="p-4 rounded-xl bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 space-y-1.5 shadow-sm">
                     <div class="flex justify-between items-start">
-                        <h4 class="font-bold text-sm text-stone-900 dark:text-white">${b.title}</h4>
-                        <span class="text-xs px-2 py-0.5 rounded bg-terracotta-100 dark:bg-terracotta-900/30 text-terracotta-800 dark:text-terracotta-300 font-medium">${b.year}</span>
+                        <h4 class="font-bold text-sm text-stone-900 dark:text-white pr-3">${b.title}</h4>
+                        <span class="text-xs px-2.5 py-0.5 rounded-full bg-terracotta-100 dark:bg-terracotta-950 text-terracotta-800 dark:text-terracotta-300 font-bold shrink-0 border border-terracotta-200 dark:border-terracotta-800">${b.year}</span>
                     </div>
-                    <div class="text-xs text-stone-500 dark:text-stone-400 font-medium">${b.genre} • Published by ${b.publisher}</div>
-                    <p class="text-xs text-stone-600 dark:text-stone-300 font-serif pt-1 leading-relaxed">${b.description}</p>
+                    <div class="text-xs text-stone-500 dark:text-stone-400 font-serif">${b.genre} • <span class="italic">${b.description}</span></div>
                 </div>
             `).join('');
 
@@ -1462,19 +677,18 @@
             };
 
             if (isFav) {
-                btn.className = "px-4 py-2 rounded-lg bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 text-xs font-medium transition flex items-center space-x-1.5";
-                text.textContent = "Saved in Archive";
+                btn.className = "px-4 py-2.5 rounded-xl bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 hover:bg-stone-300 text-xs font-semibold transition flex items-center space-x-2";
+                text.textContent = "Saved in Personal Archive";
             } else {
-                btn.className = "px-4 py-2 rounded-lg bg-terracotta-600 text-white hover:bg-terracotta-700 text-xs font-medium transition flex items-center space-x-1.5";
-                text.textContent = "Save to Favorites";
+                btn.className = "px-4 py-2.5 rounded-xl bg-terracotta-600 text-white hover:bg-terracotta-700 text-xs font-bold transition flex items-center space-x-2 shadow-sm";
+                text.textContent = "Save to Personal Archive";
             }
         }
 
         function copyCitation() {
             if (!currentModalWriter) return;
-            const citation = `Jharkhand Women Writers Archive. "${currentModalWriter.name} (${currentModalWriter.language} Author from ${currentModalWriter.district})." Bibliographical Entry. Web Archive, 2026.`;
+            const citation = `Jharkhand Women Writers Archive. "${currentModalWriter.name} (${currentModalWriter.language} Author from ${currentModalWriter.district}, Jharkhand)." Digital Cultural Bibliography. Web Archive, 2026.`;
             
-            // Clipboard copy fallbacks
             const tempInput = document.createElement('textarea');
             tempInput.value = citation;
             document.body.appendChild(tempInput);
@@ -1482,10 +696,10 @@
             document.execCommand('copy');
             document.body.removeChild(tempInput);
 
-            showToast('Citation copied to clipboard!');
+            showToast('Bibliographical citation copied to clipboard!');
         }
 
-        // Favorites & LocalStorage Management
+        // Favorites & Drawer Logic
         function toggleFavorite(id, e) {
             if (e) e.stopPropagation();
             const index = favorites.indexOf(id);
@@ -1498,25 +712,13 @@
             }
             localStorage.setItem('jwwa_favorites', JSON.stringify(favorites));
             updateFavBadge();
-            renderWriters(writersData.filter(w => {
-                // Keep current filter active
-                const query = document.getElementById('search-input').value.toLowerCase().trim();
-                const genre = document.getElementById('genre-filter').value;
-                const district = document.getElementById('district-filter').value;
-
-                if (selectedLanguage !== 'ALL' && w.language !== selectedLanguage) return false;
-                if (district !== 'ALL' && w.district !== district) return false;
-                if (genre !== 'ALL' && !w.books.some(b => b.genre === genre)) return false;
-                if (query !== '' && !w.name.toLowerCase().includes(query) && !w.language.toLowerCase().includes(query) && !w.district.toLowerCase().includes(query)) return false;
-                return true;
-            }));
+            filterWriters();
             renderFavDrawerList();
         }
 
         function updateFavBadge() {
             const badge = document.getElementById('fav-badge');
             badge.textContent = favorites.length;
-            badge.classList.toggle('hidden', favorites.length === 0);
         }
 
         function toggleFavoritesDrawer() {
@@ -1536,28 +738,28 @@
 
             if (favWriters.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-stone-400">
-                        <svg class="w-10 h-10 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        <p class="text-xs">No saved writers yet.</p>
-                        <p class="text-[11px] mt-1 text-stone-500">Click the heart icon on any writer card to save here.</p>
+                    <div class="text-center py-16 text-stone-400 space-y-2">
+                        <svg class="w-12 h-12 mx-auto opacity-40 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        <p class="text-xs font-bold text-stone-600 dark:text-stone-300">No Saved Writers Yet</p>
+                        <p class="text-[11px] text-stone-500 max-w-xs mx-auto font-serif">Click the heart icon on any writer card to save them to your personal archive.</p>
                     </div>
                 `;
                 return;
             }
 
             container.innerHTML = favWriters.map(w => `
-                <div class="p-3 rounded-xl bg-stone-50 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-stone-950 border border-stone-200 dark:border-stone-800 flex items-center justify-between shadow-sm hover:border-terracotta-500/50 transition">
                     <div class="flex items-center space-x-3 cursor-pointer" onclick="openWriterModal('${w.id}')">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br ${w.bgGradient} text-white font-bold text-xs flex items-center justify-center">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${w.bgGradient} text-white font-bold text-xs flex items-center justify-center shadow-sm">
                             ${getInitials(w.name)}
                         </div>
                         <div>
-                            <h4 class="text-xs font-bold text-stone-900 dark:text-white hover:text-terracotta-600">${w.name}</h4>
-                            <p class="text-[11px] text-stone-500">${w.language} • ${w.district}</p>
+                            <h4 class="text-xs font-bold text-stone-900 dark:text-white hover:text-terracotta-600 transition">${w.name}</h4>
+                            <p class="text-[11px] text-stone-500 font-serif">${w.language} • ${w.district}</p>
                         </div>
                     </div>
-                    <button onclick="toggleFavorite('${w.id}')" class="text-stone-400 hover:text-red-500 p-1">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <button onclick="toggleFavorite('${w.id}')" class="text-stone-400 hover:text-red-500 p-1.5 transition" title="Remove">
+                        <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
             `).join('');
@@ -1573,23 +775,7 @@
             showToast('Cleared all saved items');
         }
 
-        // Nomination Modal
-        function openNominateModal() {
-            document.getElementById('nominate-modal').classList.remove('hidden');
-        }
-
-        function closeNominateModal() {
-            document.getElementById('nominate-modal').classList.add('hidden');
-            document.getElementById('nominate-form').reset();
-        }
-
-        function handleNominationSubmit(e) {
-            e.preventDefault();
-            closeNominateModal();
-            showToast('Thank you! Nomination submitted for review.');
-        }
-
-        // Dark Mode Toggle
+        // Dark Mode Toggle Logic
         function toggleDarkMode() {
             const isDark = document.documentElement.classList.toggle('dark');
             document.getElementById('sun-icon').classList.toggle('hidden', !isDark);
@@ -1597,14 +783,14 @@
             localStorage.setItem('jwwa_theme', isDark ? 'dark' : 'light');
         }
 
-        // Initialize Theme preference
+        // Init Theme
         if (localStorage.getItem('jwwa_theme') === 'dark' || (!('jwwa_theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             document.getElementById('sun-icon').classList.remove('hidden');
             document.getElementById('moon-icon').classList.add('hidden');
         }
 
-        // Toast Helper
+        // Toast Notification System
         function showToast(message) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-message').textContent = message;
